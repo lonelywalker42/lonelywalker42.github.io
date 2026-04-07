@@ -1,0 +1,42 @@
+name: Daily Deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate index.html with today's date
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          TARGET="news_${TODAY}.html"
+          if [ -f "$TARGET" ]; then
+            cp "$TARGET" index.html
+            echo "Copied $TARGET → index.html"
+          else
+            echo "Warning: $TARGET not found, using latest available"
+            LATEST=$(ls -1 news_*.html 2>/dev/null | sort -r | head -1)
+            if [ -n "$LATEST" ]; then
+              cp "$LATEST" index.html
+              echo "Fallback: copied $LATEST → index.html"
+            fi
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v4
