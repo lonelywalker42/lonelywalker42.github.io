@@ -17,15 +17,19 @@ jobs:
       - name: Generate index.html with today's date
         run: |
           TODAY=$(date +%Y-%m-%d)
-          if [ -f "${TODAY}.html" ]; then
-            cp "${TODAY}.html" index.html
-            echo "Copied ${TODAY}.html → index.html"
+          TARGET="news_${TODAY}.html"
+          if [ -f "$TARGET" ]; then
+            cp "$TARGET" index.html
+            echo "Copied $TARGET → index.html"
           else
-            echo "Warning: ${TODAY}.html not found, using latest available"
-            LATEST=$(ls -1 *.html 2>/dev/null | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}\.html' | sort -r | head -1)
+            echo "Warning: $TARGET not found, using latest available"
+            LATEST=$(ls -1 news_*.html 2>/dev/null | sort -r | head -1)
             if [ -n "$LATEST" ]; then
               cp "$LATEST" index.html
               echo "Fallback: copied $LATEST → index.html"
+            else
+              echo "No news_*.html files found at all"
+              echo "<html><body><h1>No news available</h1></body></html>" > index.html
             fi
           fi
 
@@ -39,3 +43,4 @@ jobs:
 
       - name: Deploy to Pages
         uses: actions/deploy-pages@v4
+
