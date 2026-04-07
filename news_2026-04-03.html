@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily News Briefing - 2026-04-03</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        :root {
+            --ink: #1a1a1a;
+            --paper: #faf8f5;
+            --accent: #c0392b;
+            --accent2: #2c3e50;
+            --rule: #d4c5a9;
+            --muted: #7f8c8d;
+            --highlight: #fdf2e9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #e8e4df;
+            color: var(--ink);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+        }
+
+        /* ===== MASTHEAD ===== */
+        .masthead {
+            padding: 28px 40px 20px;
+            border-bottom: 4px double var(--ink);
+            text-align: center;
+        }
+        .masthead-date {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .masthead h1 {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            line-height: 1.2;
+        }
+        .masthead-sub {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+        .masthead-rule {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 12px auto 0;
+        }
+
+        /* ===== TICKER BAR ===== */
+        .ticker {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        .ticker span { opacity: 0.8; }
+        .ticker strong { color: var(--accent); font-weight: 700; }
+
+        /* ===== CONTENT ===== */
+        .content {
+            padding: 24px 40px 40px;
+        }
+
+        /* ===== CATEGORY SECTION ===== */
+        .category-section {
+            margin-bottom: 36px;
+            page-break-inside: avoid;
+        }
+        .category-section + .category-section {
+            border-top: 1px solid var(--rule);
+            padding-top: 28px;
+        }
+
+        .cat-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 8px;
+        }
+        .cat-icon { font-size: 22px; }
+        .cat-name {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+        .cat-count {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            margin-left: auto;
+        }
+
+        /* ===== OVERVIEW BOX ===== */
+        .overview {
+            background: var(--highlight);
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.9;
+            color: #4a2c0a;
+        }
+        .overview-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        /* 新增样式，用于Markdown渲染后的内容 */
+        .overview-content h1, .overview-content h2, .overview-content h3 {
+            margin-top: 12px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .overview-content p {
+            margin-bottom: 8px;
+        }
+        .overview-content ul, .overview-content ol {
+            margin-left: 20px;
+            margin-bottom: 8px;
+            padding-left: 0;
+        }
+        .overview-content li {
+            margin-bottom: 4px;
+            padding-left: 4px;
+        }
+        .overview-content strong {
+            font-weight: 700;
+            color: var(--accent2);
+        }
+
+        /* ===== NEWS GRID ===== */
+        .news-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 20px;
+        }
+
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #e0dcd5;
+        }
+        .news-item:last-child { border-bottom: none; }
+
+        .news-source {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+        .news-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .news-title a {
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .news-title a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* ===== LEAD STORY (first item in each section) ===== */
+        .news-grid .news-item:first-child {
+            grid-column: 1 / -1;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 14px;
+            margin-bottom: 4px;
+        }
+        .news-grid .news-item:first-child .news-title {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ===== FOOTER ===== */
+        .page-footer {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 700px) {
+            .masthead { padding: 20px 16px 16px; }
+            .masthead h1 { font-size: 28px; letter-spacing: 4px; }
+            .ticker { padding: 8px 16px; flex-wrap: wrap; gap: 4px; }
+            .content { padding: 16px 16px 28px; }
+            .news-grid { grid-template-columns: 1fr; }
+            .news-grid .news-item:first-child { grid-column: 1; }
+        }
+    </style>
+    <!-- 引入 marked.js 用于 Markdown 解析 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="page">
+        <!-- MASTHEAD -->
+        <div class="masthead">
+            <div class="masthead-date">2026-04-03</div>
+            <h1>DAILY BRIEFING</h1>
+            <div class="masthead-sub">AI-Powered News Digest</div>
+            <div class="masthead-rule"></div>
+        </div>
+
+        <!-- TICKER -->
+        <div class="ticker">
+            <span><strong>50</strong> articles from <strong>6</strong> sources</span>
+            <span>2 categories</span>
+            <span>Generated 08:00:55</span>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            
+            
+            <div class="category-section">
+                <div class="cat-header">
+                    <span class="cat-icon">💻</span>
+                    <span class="cat-name">科技</span>
+                    <span class="cat-count">29 STORIES</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <!-- 修改：将Markdown内容包裹在 overview-content div 中，用于JavaScript解析 -->
+                    <div class="overview-content">### 科技领域每日综述
+
+**今日整体动态与趋势**
+今日科技领域呈现“冰火两重天”的态势。一方面，人工智能（AI）与商业航天领域捷报频传，从大模型商业化落地、蛋白质设计突破到SpaceX的万亿估值IPO计划，显示出前沿技术强大的创新与吸金能力。另一方面，行业也面临严峻挑战，包括大规模裁员、网络安全攻击、自动驾驶故障以及社交媒体平台因用户行为变迁和成瘾性诉讼引发的行业反思。东西方科技新闻焦点有所差异，西方更关注平台演变与行业震荡，而中国科技新闻则密集聚焦于AI模型的应用落地与商业化突破。
+
+**最重要的事件**
+1.  **SpaceX计划上市，估值剑指万亿美元**：埃隆·马斯克的SpaceX被曝正计划进行首次公开募股（IPO），其估值有望达到1万亿美元，这不仅是史上最大规模的IPO之一，也可能使马斯克成为全球首位万亿富翁，标志着商业航天进入全新资本纪元。
+2.  **AI应用层爆发与算力挑战并存**：中国AI领域表现活跃，智谱、德适等公司在大模型商业化上取得显著进展（如医疗AI毛利率达96.5%），同时，豆包等应用揭示出海量算力消耗的现实。与之呼应，Anthropic的AI编程助手Claude Code因用户激增触发使用限制，凸显了AI服务规模化面临的运营压力。
+3.  **行业震荡与安全事件频发**：科技巨头甲骨文（Oracle）被曝裁员数千人，反映出行业在调整期的成本压力。同时，孩之宝（Hasbro）遭遇网络攻击，百度无人驾驶车队出现大规模故障导致交通停滞，这些事件集中暴露了企业在数字化转型中面临的运营安全与可靠性挑战。
+
+**行业/市场影响判断**
+今日新闻凸显了科技行业正处于一个**高强度分化与整合期**。资本与市场热情极度向AI、航天等尖端赛道集中，推动其加速成熟与商业化，但同时也伴随着巨大的资源投入和运营复杂性。传统科技企业及依赖线上平台的业务则面临用户习惯改变、法律风险、成本优化和网络安全的多重压力。整体而言，**技术驱动的增长叙事依然强劲，但实现可持续增长更依赖于扎实的商业化能力、稳健的运营体系以及对伦理、安全风险的妥善管理**。市场对企业的评估将愈发综合化，而非仅看重技术概念。</div>
+                </div>
+                
+
+                <div class="news-grid">
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC科技</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cgqk718l4neo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Fewer UK adults posting on social media, Ofcom finds</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC科技</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c2k35lg92dpo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Elon Musk&#39;s SpaceX set to be worth $1 trillion with planned public listing</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC科技</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cx24e1nryn9o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Peppa Pig and Transformers owner Hasbro hit by cyber-attack</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC科技</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/ce8l2q5yq51o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Claude Code users hitting usage limits &#39;way faster than expected&#39;</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC科技</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cvge91r9j80o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Mass robotaxi malfunction halts traffic in Chinese city</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC科技</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cm296jzzl9yo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Thousands lose their jobs in deep cuts at tech giant Oracle</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC科技</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c86e3eglv2go?at_medium=RSS&amp;at_campaign=rss" target="_blank">&#39;We&#39;re having a moment&#39; - fear and denial in Silicon Valley over social media addiction trial</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/395202.html" target="_blank">我的天！豆包每天烧120万亿Tokens啊！</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/395198.html" target="_blank">《自然通讯》重磅：分子之心AI技术解锁蛋白质设计新范式</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/395194.html" target="_blank">AI原生时代来临，商汤大装置如何重塑算力集群架构</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/395162.html" target="_blank">上市首日大涨111%！智谱MiniMax之后，德适交出大模型商业化最硬核答卷</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/395155.html" target="_blank">悟空率先接入国产最强编程模型Qwen3.6-Plus</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/395151.html" target="_blank">全尺寸具身人形销量全球第一之后，优必选再迎资本投票：花旗上调目标价至190港元</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/395124.html" target="_blank">还得是马斯克，史上最大IPO来了！</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/395091.html" target="_blank">开盒Claude Code的原来是中国00后！曾怒怼Anthropic窃取用户代码</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/394704.html" target="_blank">中国最强编程模型来了！ 阿里Qwen3.6-Plus性能直逼Claude，国产大模型杀入决赛圈</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">量子位</div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/394641.html" target="_blank">开卷视觉编程！GLM-5V-Turbo上线，一张草图搞定前端</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">爱范儿</div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1660774?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">11.98 万起，占了同级一半销量的小鹏 MONA M03，又加上了「图灵芯片」和「越级座舱」</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">爱范儿</div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1660770?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">腾讯会议这波 AI 功能，让我彻底戒掉了整理焦虑</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">爱范儿</div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1660740?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">AirPods Max 2 体验：降噪更强声音更饱满，稳定更新的小升级</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">爱范儿</div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1660703?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">每天烧 120 万亿 Token，这是 AI 圈最新的凡尔赛</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">爱范儿</div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1660654?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">获得 B 站 AI 创作大赛一等奖的 UP 主说，AI 对创意没有任何帮助，但价值在别处</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">爱范儿</div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1660636?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">惹众怒！Anthropic 疯狂删库，他连夜爆改 Claude Code 源码拿下史上最快 10 万星</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">爱范儿</div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1660620?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">十年时间，移动影像抵达「入海口」</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">爱范儿</div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1660614?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">早报｜国内五大手机厂商全线涨价/奇瑞宣布放1天春假，但要用年假来换/广州早茶新规：茶位费必须配茶、传统点心须24小时现制</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">少数派</div>
+                        <div class="news-title">
+                            <a href="https://sspai.com/post/108202" target="_blank">汇聚热爱，「2050 大会」少数派线下活动邀请你来参与</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">少数派</div>
+                        <div class="news-title">
+                            <a href="https://sspai.com/post/108197" target="_blank">派晚报：2026 年愚人节产品大赏</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">少数派</div>
+                        <div class="news-title">
+                            <a href="https://sspai.com/post/107218" target="_blank">被咬一口的世界，苹果 50 年的疯狂与奇迹</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">少数派</div>
+                        <div class="news-title">
+                            <a href="https://sspai.com/post/108175" target="_blank">派早报：OPPO 发布 K15 Pro 系列、DLSS 4.5 开始推送等</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section">
+                <div class="cat-header">
+                    <span class="cat-icon">🏛️</span>
+                    <span class="cat-name">时政</span>
+                    <span class="cat-count">21 STORIES</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <!-- 修改：将Markdown内容包裹在 overview-content div 中，用于JavaScript解析 -->
+                    <div class="overview-content">[时政] 今日共 21 条新闻:
+  - 特朗普演講未能安撫油價股市   為何各界認為他未澄清停戰關鍵問題
+  - 中國試圖在伊朗戰爭中扮演和平調解者，這會奏效嗎？
+  - 「香港故事」展館重開：淡化港英歷史不提「六四」，六年改造重樹敘事
+  - 導彈無人機籠罩下的海灣富豪天堂會不會變成地獄？
+  - 社交如何改變大腦，並讓你感覺更好
+  ... 及其他 16 条</div>
+                </div>
+                
+
+                <div class="news-grid">
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cdxdkqknqwqo/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">特朗普演講未能安撫油價股市   為何各界認為他未澄清停戰關鍵問題</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cp8d61nl2j4o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">中國試圖在伊朗戰爭中扮演和平調解者，這會奏效嗎？</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cpd547jdgn6o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">「香港故事」展館重開：淡化港英歷史不提「六四」，六年改造重樹敘事</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cz67gxpzde8o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">導彈無人機籠罩下的海灣富豪天堂會不會變成地獄？</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c8ej4r86119o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">社交如何改變大腦，並讓你感覺更好</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/czreyg0e5nzo/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">特朗普再提退出北約：這對同盟前景有何啟示</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/czjw4p8grewo/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">伊朗戰爭添風險　亞洲外勞糾結應否繼續在波斯灣「拼命」</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c2evx4gk13lo/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">不想買還是買不起？——香港青年置業率持續下降</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cvge9v370d9o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">中國禁止將空置住房改為「骨灰公寓」</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">BBC中文</div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c4gvdl8k1xjo/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">阿爾忒彌斯2號啟航：睽違54年 人類再度飛向月球</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/us-news/2026/apr/02/uganda-receives-first-us-deportation-flight-under-third-country-agreement" target="_blank">Uganda receives first US deportation flight under third-country agreement</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/world/2026/apr/02/maple-syrup-scam-quebec-canada" target="_blank">Alleged maple syrup scam in Quebec uncovered by Canadian broadcaster</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/us-news/2026/apr/02/trump-costa-rica-deported-migrants-deal" target="_blank">Costa Rica strikes deal to accept third country deportees from US</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/world/2026/apr/02/us-lifts-sanctions-on-venezuela-acting-president-delcy-rodriguez" target="_blank">US lifts sanctions on Venezuela’s acting president Delcy Rodríguez</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/world/2026/apr/02/magnitude-78-earthquake-strikes-in-indonesia-sparking-tsunami-alert" target="_blank">One killed and buildings damaged as magnitude 7.4 earthquake strikes Indonesia</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/world/2026/apr/02/new-zealand-cook-islands-defense" target="_blank">New Zealand signs defence pact with Cook Islands after quarrel over China deal</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/business/2026/apr/03/australia-says-it-wont-raise-drug-prices-after-trumps-100-tariff-on-pharmaceuticals-imported-into-us" target="_blank">Australia says it won’t raise drug prices after Trump’s 100% tariff on pharmaceuticals imported into US</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/australia-news/2026/apr/02/iranian-tourist-ban-doesnt-align-with-the-australian-values-hedieh-signed-up-to-as-a-citizen" target="_blank">Iranian tourist ban doesn’t align with the ‘Australian values’ Hedieh signed up to as a citizen</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/australia-news/2026/apr/03/aged-care-funding-assessment-tool-algorithm" target="_blank">‘Letting the algorithm rip’: no legal basis for lack of human override of aged care funding tool, inquiry hears</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/australia-news/2026/apr/02/moira-deeming-top-victorian-liberal-ticket-ntwnfb" target="_blank">Moira Deeming to secure top spot on Victorian Liberal ticket</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">Guardian</div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/australia-news/2026/apr/02/alleged-bondi-terrorist-naveed-akram-denied-suppression-order-over-identities-of-family-members-ntwnfb" target="_blank">Alleged Bondi terrorist Naveed Akram denied suppression order over identities of family members</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- FOOTER -->
+        <div class="page-footer">
+            Generated by Daily News AI Aggregator &middot; 2026-04-03
+        </div>
+    </div>
+
+    <!-- 新增脚本：在页面加载后解析 Markdown -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const overviewContents = document.querySelectorAll('.overview-content');
+            overviewContents.forEach(element => {
+                // 获取原始Markdown文本
+                const markdown = element.innerHTML;
+                // 使用 marked.js 解析 Markdown 为 HTML
+                const html = marked.parse(markdown);
+                // 更新元素内容
+                element.innerHTML = html;
+            });
+        });
+    </script>
+</body>
+</html>
