@@ -1,0 +1,3331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily News Briefing - 2026-04-24</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        :root {
+            --ink: #1a1a1a;
+            --paper: #faf8f5;
+            --accent: #c0392b;
+            --accent2: #2c3e50;
+            --rule: #d4c5a9;
+            --muted: #7f8c8d;
+            --highlight: #fdf2e9;
+            --card-bg: #ffffff;
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            --nav-bg: rgba(250, 248, 245, 0.95);
+            --ticker-bg: #1a1a1a;
+            --ticker-text: #faf8f5;
+            --footer-bg: #1a1a1a;
+            --footer-text: #faf8f5;
+        }
+
+        [data-theme="dark"] {
+            --ink: #e8e0d8;
+            --paper: #1a1a1e;
+            --accent: #e74c3c;
+            --accent2: #5dade2;
+            --rule: #3a3a3e;
+            --muted: #888890;
+            --highlight: #2a2a2e;
+            --card-bg: #222226;
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            --nav-bg: rgba(26, 26, 30, 0.95);
+            --ticker-bg: #2a2a2e;
+            --ticker-text: #e8e0d8;
+            --footer-bg: #2a2a2e;
+            --footer-text: #e8e0d8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #e8e4df;
+            color: var(--ink);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        [data-theme="dark"] body {
+            background: #121216;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+
+        /* ===== DARK MODE TOGGLE ===== */
+        .theme-toggle {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 1000;
+            background: var(--paper);
+            border: 1px solid var(--rule);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: background 0.3s, transform 0.2s;
+            color: var(--ink);
+        }
+        .theme-toggle:hover { transform: scale(1.1); }
+
+        /* ===== MASTHEAD ===== */
+        .masthead {
+            padding: 28px 40px 20px;
+            border-bottom: 4px double var(--ink);
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .masthead-date {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .masthead h1 {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            line-height: 1.2;
+        }
+        .masthead-sub {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+        .masthead-rule {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 12px auto 0;
+            transition: background 0.3s;
+        }
+
+        /* ===== TICKER BAR ===== */
+        .ticker {
+            background: var(--ticker-bg);
+            color: var(--ticker-text);
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .ticker span { opacity: 0.8; }
+        .ticker strong { color: var(--accent); font-weight: 700; }
+
+        /* ===== CATEGORY NAV ===== */
+        .cat-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--rule);
+            padding: 0 40px;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .cat-nav::-webkit-scrollbar { display: none; }
+        .cat-nav-link {
+            flex-shrink: 0;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--muted);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .cat-nav-link:hover { color: var(--ink); }
+        .cat-nav-link.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* ===== CONTENT ===== */
+        .content {
+            padding: 24px 40px 40px;
+        }
+
+        /* ===== CATEGORY SECTION ===== */
+        .category-section {
+            margin-bottom: 36px;
+            page-break-inside: avoid;
+        }
+        .category-section + .category-section {
+            border-top: 1px solid var(--rule);
+            padding-top: 28px;
+            transition: border-color 0.3s;
+        }
+
+        .cat-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 8px;
+            cursor: pointer;
+            user-select: none;
+            transition: border-color 0.3s;
+        }
+        .cat-header:hover .cat-name { opacity: 0.7; }
+        .cat-icon { font-size: 22px; }
+        .cat-name {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            transition: opacity 0.2s;
+        }
+        .cat-count {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            margin-left: auto;
+            transition: color 0.3s;
+        }
+        .cat-chevron {
+            font-size: 12px;
+            color: var(--muted);
+            transition: transform 0.3s;
+            margin-left: 8px;
+        }
+        .cat-chevron.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 20px;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .news-grid.collapsed {
+            max-height: 0 !important;
+            padding-bottom: 0;
+        }
+
+        /* ===== OVERVIEW BOX ===== */
+        .overview {
+            background: var(--highlight);
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.9;
+            color: var(--ink);
+            transition: background 0.3s, color 0.3s;
+        }
+        .overview-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .overview-content h1, .overview-content h2, .overview-content h3 {
+            margin-top: 12px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .overview-content p { margin-bottom: 8px; }
+        .overview-content ul, .overview-content ol {
+            margin-left: 20px;
+            margin-bottom: 8px;
+            padding-left: 0;
+        }
+        .overview-content li {
+            margin-bottom: 4px;
+            padding-left: 4px;
+        }
+        .overview-content strong {
+            font-weight: 700;
+            color: var(--accent2);
+            transition: color 0.3s;
+        }
+
+        /* ===== NEWS ITEM ===== */
+        .news-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--rule);
+            transition: background 0.2s, border-color 0.3s;
+            border-radius: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .news-item:last-child { border-bottom: none; }
+        .news-item:hover {
+            background: var(--highlight);
+            transform: translateY(-1px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .news-source {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+        .news-published {
+            font-size: 10px;
+            color: var(--muted);
+            margin-left: 8px;
+            font-weight: 400;
+        }
+        .news-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .news-title a {
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .news-title a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .news-summary {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* ===== LEAD STORY (first item in each section) ===== */
+        .news-grid .news-item:first-child {
+            grid-column: 1 / -1;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 14px;
+            margin-bottom: 4px;
+        }
+        .news-grid .news-item:first-child .news-title {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .back-to-top:hover { background: #e74c3c; }
+
+        /* ===== FOOTER ===== */
+        .page-footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            .theme-toggle, .cat-nav, .back-to-top, .cat-chevron { display: none !important; }
+            .cat-header { cursor: default; }
+            .news-grid { max-height: none !important; }
+            .page { box-shadow: none; max-width: 100%; }
+            body { background: #fff; color: #000; }
+            .masthead h1 { font-size: 28px; }
+            .news-item { break-inside: avoid; }
+            .news-item:hover { background: none; transform: none; box-shadow: none; }
+            .news-title a { color: #000; border-bottom: 1px dotted #999; }
+            .news-title a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 10px;
+                color: #666;
+                font-weight: 400;
+            }
+            .overview { background: #f8f8f8; border-left-color: #333; }
+            .cat-nav { position: static; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .masthead { padding: 20px 16px 16px; }
+            .masthead h1 { font-size: 28px; letter-spacing: 4px; }
+            .ticker { padding: 8px 16px; flex-wrap: wrap; gap: 4px; }
+            .cat-nav { padding: 0 16px; }
+            .content { padding: 16px 16px 28px; }
+            .news-grid { grid-template-columns: 1fr; }
+            .news-grid .news-item:first-child { grid-column: 1; }
+            .theme-toggle { top: 8px; right: 8px; width: 36px; height: 36px; font-size: 16px; }
+            .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+        }
+        @media (max-width: 480px) {
+            .masthead h1 { font-size: 22px; letter-spacing: 2px; }
+            .cat-name { font-size: 18px; }
+            .ticker { font-size: 10px; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="page">
+        <!-- DARK MODE TOGGLE -->
+        <button class="theme-toggle" id="themeToggle" title="切换暗色模式" aria-label="切换暗色模式">☀️</button>
+
+        <!-- MASTHEAD -->
+        <div class="masthead">
+            <div class="masthead-date">2026-04-24</div>
+            <h1>DAILY BRIEFING</h1>
+            <div class="masthead-sub">AI-Powered News Digest</div>
+            <div class="masthead-rule"></div>
+        </div>
+
+        <!-- TICKER -->
+        <div class="ticker">
+            <span><strong>168</strong> articles from <strong>17</strong> sources</span>
+            <span>7 categories</span>
+            <span>Generated 19:49:42</span>
+        </div>
+
+        <!-- CATEGORY NAV -->
+        <nav class="cat-nav" id="catNav">
+            
+            <a class="cat-nav-link" href="#cat-科技">💻 科技</a>
+            
+            <a class="cat-nav-link" href="#cat-财经">💰 财经</a>
+            
+            <a class="cat-nav-link" href="#cat-时政">🏛️ 时政</a>
+            
+            <a class="cat-nav-link" href="#cat-国际">🌍 国际</a>
+            
+            <a class="cat-nav-link" href="#cat-体育">⚽ 体育</a>
+            
+            <a class="cat-nav-link" href="#cat-娱乐">🎬 娱乐</a>
+            
+            <a class="cat-nav-link" href="#cat-健康">🏥 健康</a>
+            
+        </nav>
+
+        <!-- CONTENT -->
+        <div class="content">
+            
+            
+            <div class="category-section" id="cat-科技">
+                <div class="cat-header" data-target="grid-科技">
+                    <span class="cat-icon">💻</span>
+                    <span class="cat-name">科技</span>
+                    <span class="cat-count">30 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content"># 科技领域每日综述
+
+## 整体动态与趋势
+
+今日科技领域呈现三大核心趋势：网络安全威胁持续升级，涉及国家级黑客组织攻击关键基础设施及大规模路由器感染事件；量子计算对现有加密体系的威胁时间表被大幅提前，谷歌将“Q Day”截止日期提前至2029年；AI安全与监管争议加剧，包括Anthropic调查其“危险”AI工具被未授权访问、Meta计划追踪员工行为数据训练AI模型等事件引发广泛讨论。
+
+## 最重要事件
+
+1. **谷歌大幅提前量子计算威胁时间表**：谷歌将“Q Day”（量子计算机破解现有加密体系的关键节点）截止日期提前至2029年，并警告整个行业需加速从RSA和椭圆曲线加密迁移。同时，研究显示量子计算机破解加密所需资源可能远低于此前预期，加剧了行业紧迫感。
+
+2. **国家级黑客攻击持续升级**：伊朗关联黑客组织成功入侵美国关键基础设施运营系统，俄罗斯军方则利用已停产的消费级路由器在全球120个国家发动攻击，超过1.4万台华硕路由器被感染。此外，一种自我传播的恶意软件正在污染开源软件并清除伊朗境内设备数据。
+
+3. **微软紧急修复macOS和Linux ASP.NET安全漏洞**：微软发布紧急更新修复一个可能导致认证失败的严重漏洞，同时联邦网络安全专家此前曾批评微软云产品“像一堆屎”但仍批准其使用，凸显行业安全审查机制的矛盾。
+
+## 行业与市场影响判断
+
+量子计算威胁时间表的大幅提前将加速全球加密技术升级进程，对依赖RSA/EC加密的金融、通信等行业构成直接冲击，预计将催生新一轮加密迁移市场机会。国家级黑客攻击的常态化与工具化趋势，将推动企业安全预算持续增长，特别是针对关键基础设施和供应链安全的投入。AI安全与监管争议的加剧可能促使各国加快立法步伐，同时影响企业对AI技术的部署策略，尤其是在员工监控和敏感模型发布方面。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-科技">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Wed, 25 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/03/google-bumps-up-q-day-estimate-to-2029-far-sooner-than-previously-thought/" target="_blank">Google bumps up Q Day deadline to 2029, far sooner than previously thought</a>
+                        </div>
+                        
+                        <div class="news-summary">Company warns entire industry to move off RSA and EC more quickly.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/big-tech/kalshi-suspended-three-political-candidates-from-its-platform-for-insider-trading-222433937.html?src=rss" target="_blank">Kalshi suspended three political candidates from its platform for insider trading</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Prediction market Kalshi has taken action &lt;a class=&#34;link&#34; href=&#34;https://news.kalshi.com/p/kalshi-political-insider-tr…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/04/microsoft-issues-emergency-update-for-macos-and-linux-asp-net-threat/" target="_blank">Microsoft issues emergency update for macOS and Linux ASP.NET threat</a>
+                        </div>
+                        
+                        <div class="news-summary">When authentication fails, things can go very, very wrong.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cgrlvvrn409o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Xbox cuts prices for Game Pass but ends day-one Call of Duty access</a>
+                        </div>
+                        
+                        <div class="news-summary">New Call of Duty games will be added to the subscription service &#34;about a year&#34; after release, Microsoft said.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cy41zejp9pko?at_medium=RSS&amp;at_campaign=rss" target="_blank">Anthropic investigating claim of unauthorised access to Mythos AI tool</a>
+                        </div>
+                        
+                        <div class="news-summary">The AI company has said the model is too dangerous to release publicly because of its hacking capabilities.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Wed, 18 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/information-technology/2026/03/federal-cyber-experts-called-microsofts-cloud-a-pile-of-shit-approved-it-anyway/" target="_blank">Federal cyber experts called Microsoft&#39;s cloud a &#34;pile of shit,&#34; approved it anyway</a>
+                        </div>
+                        
+                        <div class="news-summary">One Microsoft product was approved despite years of concerns about its security.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Wed, 11 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/03/14000-routers-are-infected-by-malware-thats-highly-resistant-to-takedowns/" target="_blank">14,000 routers are infected by malware that&#39;s highly resistant to takedowns</a>
+                        </div>
+                        
+                        <div class="news-summary">Most of the devices are made by Asus and are located in the US.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Wed, 08 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/04/iran-linked-hackers-disrupt-operations-at-us-critical-infrastructure-sites/" target="_blank">Iran-linked hackers disrupt operations at US critical infrastructure sites</a>
+                        </div>
+                        
+                        <div class="news-summary">As the US and Israel&#39;s war has ramped up, so too have hacks on US industrial sites.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Wed, 08 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/04/russias-military-hacks-thousands-of-consumer-routers-to-steal-credentials/" target="_blank">Thousands of consumer routers hacked by Russia&#39;s military</a>
+                        </div>
+                        
+                        <div class="news-summary">End-of-life routers in homes and small offices hacked in 120 countries.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 31 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.co.uk/sounds/play/w3ct8jxn?at_medium=RSS&amp;at_campaign=rss" target="_blank">Tech Life</a>
+                        </div>
+                        
+                        <div class="news-summary">Attribution science is becoming an increasingly important tool in climate lawsuits.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Tue, 31 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/03/new-quantum-computing-advances-heighten-threat-to-elliptic-curve-cryptosystems/" target="_blank">Quantum computers need vastly fewer resources than thought to break vital encryption</a>
+                        </div>
+                        
+                        <div class="news-summary">No, the sky isn&#39;t falling, but Q Day &lt;em&gt;is&lt;/em&gt; coming, and it won&#39;t be as expensive as thought.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Tue, 24 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/03/self-propagating-malware-poisons-open-source-software-and-wipes-iran-based-machines/" target="_blank">Self-propagating malware poisons open source software and wipes Iran-based machines</a>
+                        </div>
+                        
+                        <div class="news-summary">Development houses: It&#39;s time to check your networks for infections.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c4glw5nyrggo?at_medium=RSS&amp;at_campaign=rss" target="_blank">UK gaming icon Peter Molyneux on AI, his final creation and a changing industry</a>
+                        </div>
+                        
+                        <div class="news-summary">The creator of iconic series such as Fable says Masters of Albion will be the last game he makes.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cvglyklz49jo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Meta to track workers&#39; clicks and keystrokes to train AI</a>
+                        </div>
+                        
+                        <div class="news-summary">The firm will take data from the way employees work for its artificial intelligence models.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.co.uk/sounds/play/w3ct8jxr?at_medium=RSS&amp;at_campaign=rss" target="_blank">Tech Life</a>
+                        </div>
+                        
+                        <div class="news-summary">How to say goodbye and pay tribute to a loved one - with a hologram.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c4gxj049wljo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Ofcom investigating Telegram over child sexual abuse material concerns</a>
+                        </div>
+                        
+                        <div class="news-summary">The popular messaging service told the BBC in a statement it &#34;categorically denies Ofcom&#39;s accusations&#34;.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cn4vkye71ypo?at_medium=RSS&amp;at_campaign=rss" target="_blank">How will Apple change under &#39;product guy&#39; John Ternus?</a>
+                        </div>
+                        
+                        <div class="news-summary">How Ternus responds to challenges facing Apple will go a long way to deciding the tech giant&#39;s future, writes Zoe Kleinm…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/04/contrary-to-popular-superstition-aes-128-is-just-fine-in-a-post-quantum-world/" target="_blank">Contrary to popular superstition, AES 128 is just fine in a post-quantum world</a>
+                        </div>
+                        
+                        <div class="news-summary">A stubborn misconception is hampering the already hard work of quantum readiness.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c1kr19lry18o?at_medium=RSS&amp;at_campaign=rss" target="_blank">New era as Apple names new boss to replace Tim Cook after 15 years</a>
+                        </div>
+                        
+                        <div class="news-summary">Ternus will take over running the technology giant in September as Cook steps up to become executive chairman.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Tue, 17 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/03/researchers-disclose-vulnerabilities-in-ip-kvms-from-4-manufacturers/" target="_blank">Researchers disclose vulnerabilities in IP KVMs from four manufacturers</a>
+                        </div>
+                        
+                        <div class="news-summary">Internet-exposed devices that give BIOS-level access? What could possibly go wrong?</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 14 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.co.uk/sounds/play/w3ct8jxq?at_medium=RSS&amp;at_campaign=rss" target="_blank">Tech Life</a>
+                        </div>
+                        
+                        <div class="news-summary">Can pedestrians, runners and cyclists safely share the road with self-driving vehicles?</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Tue, 07 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.co.uk/sounds/play/w3ct8jxp?at_medium=RSS&amp;at_campaign=rss" target="_blank">Tech Life</a>
+                        </div>
+                        
+                        <div class="news-summary">Is there a way to fix AI&#39;s problem with trust?</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC科技
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c0e7le127v5o?at_medium=RSS&amp;at_campaign=rss" target="_blank">From scientist to silk farmer: India&#39;s silk industry renewal</a>
+                        </div>
+                        
+                        <div class="news-summary">Silk production is an increasingly high-tech business in India.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/04/23/authorities-arrest-special-forces-soldier-who-allegedly-made-400k-on-polymarket-bet-involving-maduro-operation/" target="_blank">Authorities arrest special forces soldier who allegedly made $400K on Polymarket bet involving Maduro operation</a>
+                        </div>
+                        
+                        <div class="news-summary">The soldier is accused of using classified government information to inform a wager on the prediction market Polymarket.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/ai/claude-can-now-connect-to-lifestyle-apps-like-spotify-instacart-and-alltrails-225510552.html?src=rss" target="_blank">Claude can now connect to lifestyle apps like Spotify, Instacart and AllTrails</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Anthropic is &lt;a class=&#34;link&#34; href=&#34;https://claude.com/blog/connectors-for-everyday-life&#34; target=&#34;_blank&#34;&gt;expanding&lt;/a…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/04/23/redwood-materials-loses-coo-amid-layoffs-restructuring/" target="_blank">Redwood Materials loses COO amid layoffs, restructuring</a>
+                        </div>
+                        
+                        <div class="news-summary">Former Tesla executive Chris Lister is retiring, and at least three other VPs have left Redwood around the recent restru…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/04/23/social-media-ban-children-countries-list/" target="_blank">These are the countries moving to ban social media for children</a>
+                        </div>
+                        
+                        <div class="news-summary">Australia was the first country to issue a ban in late 2025, aiming to reduce the pressures and risks that young users m…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/04/23/bret-taylors-sierra-buys-yc-backed-ai-startup-fragment/" target="_blank">Bret Taylor’s Sierra buys YC-backed AI startup Fragment</a>
+                        </div>
+                        
+                        <div class="news-summary">Sierra, the AI customer service agent startup founded by technologist Bret Taylor, announced today that it has acquired …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            量子位
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.qbitai.com/2026/04/406221.html" target="_blank">刚刚，GPT-5.5发布！内测英伟达工程师：失去它像被截肢</a>
+                        </div>
+                        
+                        <div class="news-summary">与上个版本GPT5.4相比，新模型在代码、知识工作、科学研究三个领域全部拉开身位</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/04/now-even-ransomware-is-using-post-quantum-cryptography/" target="_blank">In a first, a ransomware family is confirmed to be quantum-safe</a>
+                        </div>
+                        
+                        <div class="news-summary">Technically speaking, there&#39;s no practical benefit to use PQC. So why is it being used?</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-财经">
+                <div class="cat-header" data-target="grid-财经">
+                    <span class="cat-icon">💰</span>
+                    <span class="cat-name">财经</span>
+                    <span class="cat-count">8 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 每日财经综述
+
+今日财经领域整体呈现“科技驱动与地缘博弈并行”的态势。AI热潮持续推高芯片巨头股价，但地缘政治风险（如美欧防务关系、中美技术封锁）与金融行业内部变革（如投行收费差异、四大会计师事务所淘汰终身制）成为市场关注焦点。能源市场受中东局势影响波动，而美元互换工具的“武器化”讨论则凸显全球金融体系的新挑战。
+
+**最重要事件：**
+1. **英特尔股价因AI销售激增创历史新高**：CEO宣布公司完成“根本性”转型，AI芯片需求爆发成为核心驱动力，标志着传统芯片巨头在AI时代的强势回归。
+2. **波兰总理质疑美国对欧洲防务的忠诚度**：欧盟内部呼吁加强自身防务条款，反映跨大西洋关系裂痕加深，可能影响欧洲国防开支及相关产业投资逻辑。
+3. **四大会计师事务所（KPMG、EY）打破终身制，降级合伙人**：此举终结了“一职到老”的行业惯例，预示专业服务领域绩效导向的激进改革，可能引发行业薪酬与人才结构重塑。
+
+**行业/市场影响判断：**
+- **科技板块**：AI商业化加速将巩固半导体、云计算等领域的增长预期，但中美技术脱钩风险（如限制中国获取先进技术）可能加剧供应链不确定性。
+- **金融与专业服务**：投行收费不透明及四大所人事改革，将推动投资者与客户重新评估服务价值，行业集中度或进一步上升。
+- **地缘与能源**：中东停火协议延长未能抑制油价上涨，叠加美元互换工具的地缘化使用，短期能源与汇率波动风险加大，投资者需警惕政策黑天鹅。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-财经">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            FT中文
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ft.com/content/37261470-d1aa-4a3b-8a13-abec38f34523" target="_blank">Intel shares set to hit record high on AI sales boom</a>
+                        </div>
+                        
+                        <div class="news-summary">CEO says US chipmaker has made ‘fundamental’ changes after year-long turnaround</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            FT中文
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ft.com/content/1a5a2502-a45a-40c1-af6f-b30ecc34bacb" target="_blank">Polish PM questions whether US is ‘loyal’ to Europe’s defence</a>
+                        </div>
+                        
+                        <div class="news-summary">Donald Tusk says EU should bolster its own Article 42.7 mutual defence clause</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            FT中文
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ft.com/content/62b8159b-1cf1-4dd8-9352-cde0021dec61" target="_blank">Banks charged sharply different fees for access to Anthropic investment</a>
+                        </div>
+                        
+                        <div class="news-summary">Disparate pricing raises prospect of investors earning unequal returns in the same deal on the basis of who their banker…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            FT中文
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ft.com/content/ea8c8161-5b86-409b-93cf-5e778300d87e" target="_blank">China’s own Mythos is coming — America must prepare</a>
+                        </div>
+                        
+                        <div class="news-summary">The US needs to block Chinese access to the most advanced technology</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            FT中文
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ft.com/content/aa7b9fe2-662b-42a4-b9b4-1f6675a30519" target="_blank">The danger of weaponising dollar swap lines</a>
+                        </div>
+                        
+                        <div class="news-summary">Putative Fed chair Kevin Warsh could embrace Treasury secretary Scott Bessent’s geoeconomic agenda</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            FT中文
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ft.com/content/ea10b519-a805-461e-8a8d-3ee1751939bc" target="_blank">Donald Trump and the remaking of America’s media order</a>
+                        </div>
+                        
+                        <div class="news-summary">The president once railed against the ‘fake news’ from the outside. Today, the system itself bears his imprint</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            FT中文
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ft.com/content/7de5ef19-88c5-459f-bff7-d27d55d685c6" target="_blank">KPMG and EY demote partners in end of job-for-life model</a>
+                        </div>
+                        
+                        <div class="news-summary">Move is a departure from the practice of simply asking underperforming senior partners to retire</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            FT中文
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ft.com/content/a0b83a1d-78d3-4097-a5a7-fbc11b250f5e" target="_blank">Oil hits highest level since start of US-Iran truce</a>
+                        </div>
+                        
+                        <div class="news-summary">Rise comes despite Donald Trump’s announcement that Israel and Lebanon will extend ceasefire by three weeks</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-时政">
+                <div class="cat-header" data-target="grid-时政">
+                    <span class="cat-icon">🏛️</span>
+                    <span class="cat-name">时政</span>
+                    <span class="cat-count">30 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 时政领域每日综述（2025年4月20日）
+
+**整体动态与趋势**  
+今日时政领域呈现三大主线：一是地缘冲突与能源价格持续冲击全球经济，IMF警告战争与油价飙升可能拖累增长；二是日本突破二战后和平主义框架，大幅放宽武器出口限制，标志亚太安全格局重大转变；三是气候危机对民主制度的威胁日益显现，极端天气事件已干扰多国选举进程。此外，台湾地区领导人出访受阻、香港灾后重建等事件折射出区域政治与人道议题的交织。
+
+**最重要事件**  
+1. **日本大幅放宽武器出口**：日本政府宣布可向17个签署防卫协议的国家出售杀伤性武器，彻底打破二战后仅允许出口救援、运输等非杀伤性装备的和平主义路线。此举被视为日本军事政策的历史性转折，可能引发东亚军备竞赛。  
+2. **IMF警告全球经济风险**：国际货币基金组织指出，战争与能源价格飙升是当前全球经济增长的主要下行风险，油价、通胀与利率成为关键变量。伊朗局势紧张已导致全球最大避孕套生产商Karex警告产品价格可能上涨30%。  
+3. **台湾领导人出访受阻**：台湾地区领导人赖清德因塞舌尔、毛里求斯、马达加斯加拒绝提供飞越许可，被迫取消对斯威士兰的访问。台湾方面指责中国大陆施压，凸显两岸外交角力持续升级。
+
+**行业与市场影响判断**  
+- **地缘政治风险溢价上升**：日本武器出口政策转变将重塑全球防务产业链，东亚安全格局的不确定性可能推高相关地区国防预算与军工股估值。  
+- **能源与通胀压力传导**：霍尔木兹海峡封锁风险与伊朗局势发酵，短期内原油价格波动加剧，全球供应链成本上升将传导至消费品价格（如避孕套、运输成本），进一步压制消费与投资信心。  
+- **气候政治议程紧迫性增强**：极端天气对选举制度的干扰案例增多，可能倒逼各国将气候韧性纳入民主治理框架，推动绿色基建与灾害预警系统的政策投入。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-时政">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/uk-news/2026/apr/22/british-woman-died-in-ghana-trying-to-recoup-money-from-scammers-inquest-told" target="_blank">British woman died in Ghana trying to recoup money from scammers, inquest told</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Janet Fordham died in crash after travelling to see man who claimed he would help to recover money from earlier scams…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cx2dzg4px5jo/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">「去看回我以前的家」  香港宏福苑首批回家執拾居民的追悼與道別</a>
+                        </div>
+                        
+                        <div class="news-summary">大火發生五個月後，宏福苑居民首度獲香港政府安排上樓執拾個人物品。BBC記錄下他們為這一天所做的準備，以及返家時的訴求和情感。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cp3l0pg0ewno/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">日本放寬武器出口規定，打破二戰後和平主義路線</a>
+                        </div>
+                        
+                        <div class="news-summary">此前，日本只允許出口用於五大類用途的裝備，包括救援、運輸、警戒、監控和掃雷。日本今後可向與其簽署防衛協議的17個國家出售具殺傷力的武器。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/global-development/2026/apr/22/climate-change-extreme-weather-heatwaves-floods-wildfires-threat-democracy-elections" target="_blank">Heatwaves, floods and wildfires pose rising threat to democracy, report finds</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Research shows natural hazards linked to climate crisis disrupted 23 elections in 18 countries in 2024&lt;/p&gt;&lt;p&gt;Democrac…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cge040yl0rpo/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">中國新一波「出海」商品：火鍋、奶茶與運動服如何走向全球</a>
+                        </div>
+                        
+                        <div class="news-summary">「中國製造」過去往往意味著廉價、量產的商品，但如今一批新的中國品牌正迅速崛起。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Wed, 15 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c80mm4np5mno/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">IMF：油價與戰爭或拖累全球經濟增長</a>
+                        </div>
+                        
+                        <div class="news-summary">國際貨幣基金組織（IMF）警告，戰爭與能源價格飆升可能壓低全球經濟增長，BBC記者米歇爾·弗羅麗（Michelle Fleury）解說為何油價、通脹與利率是關鍵風險。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            CNN
+                            
+                            <span class="news-published">Wed, 12 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.cnn.com/travel/article/hippo-attack-avoid-survive-paul-templer/index.html" target="_blank">&#39;I was up to my waist down a hippo&#39;s throat.&#39; He survived, and here&#39;s his advice</a>
+                        </div>
+                        
+                        <div class="news-summary">Paul Templer was living his best life.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            CNN
+                            
+                            <span class="news-published">Wed, 12 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.cnn.com/style/article/michael-jordan-sneakers-1998-finals-sothebys-auction-record/index.html" target="_blank">Michael Jordan&#39;s 1998 NBA Finals sneakers sell for a record $2.2 million</a>
+                        </div>
+                        
+                        <div class="news-summary">In 1998, Michael Jordan laced up a pair of his iconic black and red Air Jordan 13s to bring home a Bulls victory during …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            CNN
+                            
+                            <span class="news-published">Tue, 22 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.cnn.com/2022/03/22/world/air-pollution-2021-iqair-report-climate/index.html" target="_blank">These were the best and worst places for air quality in 2021, new report shows</a>
+                        </div>
+                        
+                        <div class="news-summary">Air pollution spiked to unhealthy levels around the world in 2021, according to a new report.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/society/2026/apr/22/condom-prices-iran-war-cost-price-rise-karex" target="_blank">Condom prices could rise 30% due to Iran war, says world’s top producer Karex</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Karex produces more than 5 billion condoms annually and is a supplier to leading brands like Durex and Trojan, as wel…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/us-news/2026/apr/21/afghan-refugees-us-congo" target="_blank">Trump officials consider sending 1,100 Afghans who aided US forces to Congo</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Discussions reportedly come after Trump’s decision to stop initiative that allowed group to apply to resettle in the …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/world/2026/apr/21/taiwan-president-blames-china-cancel-eswatini-revoke-flight" target="_blank">Taiwan president blames China for forced cancellation of Eswatini trip</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Lai Ching-te abandons visit after Seychelles, Mauritius and Madagascar revoke overflight permission  &lt;/p&gt;&lt;p&gt;Taiwan’s …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c1krxz8ggxyo/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">宏福苑居民災後首度「回家」執拾 ：「每一位居民都不甘心」</a>
+                        </div>
+                        
+                        <div class="news-summary">香港大埔宏福苑七棟受災住宅居民，週一（4月20日）起分批返回受損單位執拾物品。這是自去年11月大火以來，居民首次獲准重返家園，每戶可停留三小時。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Tue, 21 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c5y7dge2513o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">霍爾木茲海峽：海上封鎖真的有用嗎？</a>
+                        </div>
+                        
+                        <div class="news-summary">美國宣布的封鎖決定，使戰爭時期最古老的脅迫手段之一——切斷海上航線以削弱經濟、擾亂貿易並迫使對手改變策略或讓步——再次成為焦點。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            CNN
+                            
+                            <span class="news-published">Tue, 18 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.cnn.com/style/article/blackpink-coachella-2023-hanboks-lotw/index.html" target="_blank">Look of the Week: Blackpink headline Coachella in Korean hanboks</a>
+                        </div>
+                        
+                        <div class="news-summary">Bringing the second day of this year&#39;s Coachella to a close, K-Pop girl group Blackpink made history Saturday night when…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Tue, 14 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cvgeewwyzk0o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">國共領袖時隔十年會晤 台灣民眾怎麼看？</a>
+                        </div>
+                        
+                        <div class="news-summary">國民黨主席鄭麗文上週訪問中國大陸，並在北京和中共總書記習近平會面。BBC中文走訪台灣民眾對此次會談的看法。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Tue, 14 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/clyjj9jwy90o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">美中角力：誰在登月競賽中領先？</a>
+                        </div>
+                        
+                        <div class="news-summary">「阿提米絲二號」登月任務顯示美國正重新聚焦月球探索。然而，致力於重返月球的還有中國。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            CNN
+                            
+                            <span class="news-published">Tue, 11 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.cnn.com/style/article/playboy-the-conversation/index.html" target="_blank">How Playboy cut ties with Hugh Hefner to create a post-MeToo brand</a>
+                        </div>
+                        
+                        <div class="news-summary">Hugh Hefner launched Playboy Magazine 70 years ago this year. The first issue included a nude photograph of Marilyn Monr…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            CNN
+                            
+                            <span class="news-published">Thu, 30 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.cnn.com/style/article/old-masters-da-vinci-egg-yolk-painting-scn/index.html" target="_blank">Scientists identify secret ingredient in Leonardo da Vinci paintings</a>
+                        </div>
+                        
+                        <div class="news-summary">&#34;Old Masters&#34; such as Leonardo da Vinci, Sandro Botticelli and Rembrandt may have used proteins, especially egg yolk, in…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/us-news/2026/apr/23/mexican-mafia-arrests-california" target="_blank">Dozens of Mexican mafia members arrested in California crackdown</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Prosecutors say 43 people indicted on charges including murder, kidnapping, extortion and drug trafficking&lt;/p&gt;&lt;p&gt;More…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/world/2026/apr/23/st-vincent-and-grenadines-government-constitutional-amendment-bills-godwin-friday" target="_blank">St Vincent and Grenadines government pauses constitutional amendment bills after public backlash</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;Bills are seeking to change section that opposition says makes Godwin Friday, a dual citizen, ineligible to be PM&lt;/p&gt;…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/world/2026/apr/23/philippines-ex-president-rodrigo-duterte-trial-charges-crimes-against-humanity" target="_blank">Philippines’ ex-president Rodrigo Duterte to face trial for crimes against humanity</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;ICC judges say there are substantial grounds to believe Duterte guided anti-drugs crackdown that killed thousands&lt;/p&gt;…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c1l962v7y22o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">美伊霍爾木茲相互鎖喉中國「意外」受到關注，特朗普訪華會再度延期嗎？</a>
+                        </div>
+                        
+                        <div class="news-summary">被指與中國有關聯的船舶接連成為焦點，這些船隻或嘗試突破美方封鎖後折返，或被美軍扣押。學者向BBC中文分析海灣局勢將如何影響特朗普下月的訪華行程及中美關係發展。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/cg407rlgpq6o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">億萬富豪孫宇晨指控特朗普家族旗下加密貨幣公司涉「勒索」</a>
+                        </div>
+                        
+                        <div class="news-summary">億萬富豪投資者孫宇晨（Justin Sun）在斥資4500萬美元購入代幣後，入稟起訴特朗普家族旗下的加密貨幣項目「世界自由金融」。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c30re8eq41po/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">五角大樓：美國海軍部長約翰・費蘭即時離任</a>
+                        </div>
+                        
+                        <div class="news-summary">他是近月來又一個離開政府的高級軍事領導人，他的離任正值美國與以色列和伊朗的戰爭持續，以及美方持續封鎖霍爾木茲海峽之際。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Guardian
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.theguardian.com/world/2026/apr/23/south-korea-air-force-selfie-crash-apology" target="_blank">Pilot’s selfie led to mid-air collision in F-15K fighter jet, says South Korea’s air force</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;One pilot ordered to repay some of the $600,000 of damage caused by collision in 2021&lt;/p&gt;&lt;p&gt;South Korea’s air force h…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c87wv2yn5d0o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">索馬利蘭: 「非洲之角」的大國博弈與台灣能源佈局背後的美中角力</a>
+                        </div>
+                        
+                        <div class="news-summary">台灣如何藉由經貿與科技實力，與美以盟友合作，在索馬利蘭開闢新外交據點，而背後又突顯了美中台在「非洲之角」的新競逐。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c3w3v1yx85po/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">中國一遊客死於英國村莊，警方稱「可能曾捲入衝突」</a>
+                        </div>
+                        
+                        <div class="news-summary">警方最初表示，相信該名男子在斯特拉斯佩弗（Strathpeffer）身亡一事屬於醫療事件。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/ckg9q1zvg15o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">中國挺過了特朗普關稅，但現在伊朗戰爭的影響來了</a>
+                        </div>
+                        
+                        <div class="news-summary">中東的衝突正對中國以出口為導向的經濟造成衝擊，為工廠訂單、成本和就業帶來壓力。</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBC中文
+                            
+                            <span class="news-published">Thu, 16 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/zhongwen/articles/c0rxxkk9vd0o/trad?at_medium=RSS&amp;at_campaign=rss" target="_blank">鰻魚：億萬寶貝——揭秘香港黑社會如何走私「海上的可卡因」</a>
+                        </div>
+                        
+                        <div class="news-summary">《BBC之眼》調查組發現了走私歐洲鰻魚的環球犯罪活動——歐洲鰻魚不但是瀕危物種，還是全球走私數量數一數二的動物。</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-国际">
+                <div class="cat-header" data-target="grid-国际">
+                    <span class="cat-icon">🌍</span>
+                    <span class="cat-name">国际</span>
+                    <span class="cat-count">30 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 国际领域每日综述
+
+**整体动态与趋势：**  
+今日国际局势呈现多重紧张态势，中东地区因美国对伊朗的石油封锁与核谈判僵局持续升温，欧洲航空业受战争影响面临燃油短缺危机。同时，美国与以色列、黎巴嫩的停火协议虽获短暂延期，但伊朗问题悬而未决，地缘政治风险外溢至全球供应链。此外，社交媒体与娱乐界亦出现争议事件，反映国际社会在安全、法律与道德层面的复杂挑战。
+
+**最重要事件：**  
+1. **美国对伊朗石油封锁升级**：美军拦截33艘往来伊朗船只，伊朗警告霍尔木兹海峡封锁将引发长期对抗，欧洲因战争导致航空燃油短缺，数千航班被迫取消。  
+2. **中东停火协议脆弱延期**：特朗普宣布以色列-黎巴嫩停火延长三周，但伊朗拒绝接受，要求解除海上封锁；美伊核谈判陷入僵局，中东安全局势仍高度不确定。  
+3. **英国福克兰群岛主权争议**：美国国防部文件暗示可能调整立场以报复英国未参与伊朗战争，英国首相府重申主权归属英国，凸显美英同盟裂痕。
+
+**行业与市场影响判断：**  
+- **能源与航空业**：伊朗石油封锁直接冲击全球油价，欧洲航空业面临燃油成本飙升与供应链断裂风险，短期或加剧通胀压力。  
+- **地缘政治风险**：中东停火协议反复与美伊对抗升级，将推高避险资产需求（如黄金、美元），并抑制区域投资信心。  
+- **国际关系格局**：美英因福克兰问题分歧，可能削弱西方联盟在安全议题上的协调性，为其他大国（如中国、俄罗斯）提供战略空间。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-国际">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cp8645d9lvyo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Ringo Starr: &#39;I made all my mistakes on stage&#39;</a>
+                        </div>
+                        
+                        <div class="news-summary">Beatles star reveals all about his new country album, being a Sir and coming up with the phrase A Hard Day&#39;s Night.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cn53vg3y574o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Singer D4vd had &#39;significant amount&#39; of child sex abuse images when arrested, prosecutors say</a>
+                        </div>
+                        
+                        <div class="news-summary">The Tiktok star&#39;s attorneys have maintained his innocence and vowed to &#34;vigorously defend&#34; him.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cgldw5ekrjpo?at_medium=RSS&amp;at_campaign=rss" target="_blank">US boards ship carrying Iran oil as Trump threatens mine-laying vessels</a>
+                        </div>
+                        
+                        <div class="news-summary">Central Command said it has intercepted 33 vessels since imposing a blockade on ships coming to and from Iran.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/04/23/nx-s1-5797876/polymarket-paris-weather-bet" target="_blank">French police probe suspected weather device tampering after odd Polymarket bet</a>
+                        </div>
+                        
+                        <div class="news-summary">The incident is the latest eyebrow-raising bet on Polymarket, as allegations of rigging and manipulation continue to hau…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c20qrg4dyr3o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Woman killed by bear in Polish forest, son and local government say</a>
+                        </div>
+                        
+                        <div class="news-summary">In an extremely rare fatal encounter, the 58-year-old was killed as she was walking in a mountainous area, her son told …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cy81lrnv5peo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Huge chunk of glacier blocks Everest route in peak climbing season</a>
+                        </div>
+                        
+                        <div class="news-summary">Sherpas cannot prepare the route to the world&#39;s highest peak because a huge block of ice is in the way.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/04/23/nx-s1-5797307/europe-airlines-jet-fuel-costs" target="_blank">Airlines in Europe slash thousands of flights as Iran war cuts jet fuel supplies</a>
+                        </div>
+                        
+                        <div class="news-summary">The soaring cost of jet fuel is forcing European airlines to cancel tens of thousands of flights, while energy authoriti…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/04/23/g-s1-118440/up-first-newsletter-us-iran-john-phelan-trump-republican-democrat-midterm-fundraising-budget-reconciliation-ice" target="_blank">Tensions rise in two ceasefires in the Middle East. And, the Navy secretary ousted</a>
+                        </div>
+                        
+                        <div class="news-summary">Tensions are rising in the Middle East as shaky ceasefire agreements between the U.S., Israel and Iran, and Lebanon and …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/04/23/nx-s1-5796719/iran-middle-east-updates" target="_blank">Trump announces a 3-week extension of the Israel-Lebanon ceasefire</a>
+                        </div>
+                        
+                        <div class="news-summary">President Trump said Thursday that Israel and Lebanon have agreed to extend their ceasefire for three weeks after the tw…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/04/23/nx-s1-5795829/peace-talks-between-us-and-iran-at-a-standstill-as-trump-extends-ceasefire" target="_blank">Peace talks between U.S. and Iran at a standstill as Trump extends ceasefire</a>
+                        </div>
+                        
+                        <div class="news-summary">President Trump has extended the ceasefire, but Iran says it&#39;s not enough if the naval blockade is still in place.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/04/23/nx-s1-5763809/tiktok-moving-vietnam-thailand-american-expats" target="_blank">How TikTok is driving American expats to Southeast Asia</a>
+                        </div>
+                        
+                        <div class="news-summary">Americans who moved to Vietnam and Thailand say their lives are now lower-stress and lower-cost. But glamorous videos on…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cde51y0zgjyo?at_medium=RSS&amp;at_campaign=rss" target="_blank">No 10 says Falklands sovereignty rests with UK after report of US &#39;review&#39;</a>
+                        </div>
+                        
+                        <div class="news-summary">An internal Pentagon document reportedly raised the prospect of a change in position in retaliation for the UK not joini…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cp38e5jgxqyo?at_medium=RSS&amp;at_campaign=rss" target="_blank">South Africa&#39;s top envoy to Ghana summoned over attacks on foreigners</a>
+                        </div>
+                        
+                        <div class="news-summary">A Ghanaian national was confronted by South Africans in a viral clip and questioned about his immigration status.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/news/2026/4/24/how-long-can-iran-survive-the-uss-hormuz-blockade?traffic_source=rss" target="_blank">How long can Iran survive the US’s Hormuz blockade?</a>
+                        </div>
+                        
+                        <div class="news-summary">And just how long can the US hold out?</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/news/2026/4/24/number-of-amputees-set-to-rise-in-gaza-as-israel-blocks-aid-ngo-warns?traffic_source=rss" target="_blank">Number of amputees set to rise in Gaza as Israel blocks aid, NGO warns</a>
+                        </div>
+                        
+                        <div class="news-summary">Thousands of amputees cannot access care and are struggling with basic mobility.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/news/2026/4/24/us-weighs-retaliation-against-nato-allies-over-iran-war-divisions-reuters?traffic_source=rss" target="_blank">US considers suspending Spain from NATO, reported internal email suggests</a>
+                        </div>
+                        
+                        <div class="news-summary">Pentagon email obtained by Reuters reveals US anger at Spain and the UK as Iran war tensions persist.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/video/newsfeed/2026/4/24/explosions-by-israeli-forces-in-south-lebanon-despite-ceasefire?traffic_source=rss" target="_blank">Explosions by Israeli forces in south Lebanon despite ceasefire</a>
+                        </div>
+                        
+                        <div class="news-summary">Smoke rise above Khiam in southern Lebanon after Israel carries out explosions despite the ceasefire.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cvglxgq1p2jo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Key suspect in notorious Tadamon massacre during Syria civil war arrested</a>
+                        </div>
+                        
+                        <div class="news-summary">Amjad Youssef was wanted over the mass killing of blindfolded civilians in April 2013 in the district of Damascus.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c87wz7445wno?at_medium=RSS&amp;at_campaign=rss" target="_blank">British conwoman who claimed to be royalty hit with new charges in Singapore</a>
+                        </div>
+                        
+                        <div class="news-summary">Dionne Marie Hanna, 85, is accused of duping more than two dozen people - including her own son.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/cz78x703lrvo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Nato says &#39;no provision&#39; to expel members after report US could seek to suspend Spain</a>
+                        </div>
+                        
+                        <div class="news-summary">An internal Pentagon email reportedly outlines options to punish allies over a perceived lack of support for Iran war.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/clyedyn6pz7o?at_medium=RSS&amp;at_campaign=rss" target="_blank">UK biobank data incident caused by &#39;a few bad apples&#39;, boss says</a>
+                        </div>
+                        
+                        <div class="news-summary">Professor Sir Rory Collins said he was &#34;angry&#34; and &#34;upset&#34; about the incident, as both the bank&#39;s boss and a participant…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c0e70e4wr00o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Judge dismisses Smokey Robinson&#39;s defamation claim against rape accusers</a>
+                        </div>
+                        
+                        <div class="news-summary">The veteran singer had made a counterclaim after four housekeepers sued him for alleged sexual assault.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/video/newsfeed/2026/4/24/environmental-crisis-in-russian-city-after-drone-attack-on-refinery?traffic_source=rss" target="_blank">Environmental crisis in Russian city after drone attack on refinery</a>
+                        </div>
+                        
+                        <div class="news-summary">People in the Russian city of Tuapse are worried about the effects of an oil refinery fire after a Ukrainian attack.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/news/2026/4/24/india-denounces-hellhole-remark-shared-by?traffic_source=rss" target="_blank">India denounces ‘hellhole’ remark shared by Trump</a>
+                        </div>
+                        
+                        <div class="news-summary">India’s Foreign Ministry says comments by US radio host Michael Savage, circulated by Trump, are &amp;#039;uninformed&amp;#039;.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/news/2026/4/24/global-hunger-report-warns-of-rising-malnutrition-and-famine-risks?traffic_source=rss" target="_blank">Global hunger report warns of rising malnutrition and famine risks</a>
+                        </div>
+                        
+                        <div class="news-summary">Conflict remains the leading driver of hunger, affecting nearly 150 million people facing acute food shortages.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c0ledd82ed0o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Kenyan leader sparks uproar after  mocking Nigerians&#39; spoken English</a>
+                        </div>
+                        
+                        <div class="news-summary">William Ruto says Kenyans speak &#34;some of the best English in the world&#34; while it is hard to understand Nigerians.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/video/newsfeed/2026/4/24/why-is-there-a-political-deadlock-in-lebanon?traffic_source=rss" target="_blank">Why is there a political deadlock in Lebanon?</a>
+                        </div>
+                        
+                        <div class="news-summary">The Lebanese government wants Hezbollah to disarm as it aims for a state monopoly on weapons.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/clyedj166k5o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Woman trapped in poo for three hours after outback toilet collapses</a>
+                        </div>
+                        
+                        <div class="news-summary">The woman got stuck waist-deep in a pit latrine in the Australian outback after it gave way.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            AlJazeera
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.aljazeera.com/video/newsfeed/2026/4/24/baby-twins-attend-their-fathers-funeral-after-israeli-settler-attack?traffic_source=rss" target="_blank">Baby twins attend their father’s funeral after Israeli settler attack</a>
+                        </div>
+                        
+                        <div class="news-summary">Palestinians gathered in the occupied West Bank to bury a 25-year-old father of twins shot dead by Israeli settlers.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCWorld
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/news/articles/c4gx1n0dl9no?at_medium=RSS&amp;at_campaign=rss" target="_blank">South Korea police arrest man for posting AI photo of runaway wolf</a>
+                        </div>
+                        
+                        <div class="news-summary">The widely circulated image had prompted authorities to move their search operation.</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-体育">
+                <div class="cat-header" data-target="grid-体育">
+                    <span class="cat-icon">⚽</span>
+                    <span class="cat-name">体育</span>
+                    <span class="cat-count">30 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 体育领域每日综述
+
+今日体育领域动态聚焦于英超争冠与保级尘埃落定、NFL选秀新星诞生，以及多项赛事规则与争议的持续发酵。整体趋势显示，顶级联赛竞争白热化，同时体育界对纪律、公平性和社会议题的关注度显著提升。
+
+**最重要事件：**
+1. **曼城登顶英超并送伯恩利降级**：曼城客场击败伯恩利，升至积分榜首位，同时确认伯恩利降级至英冠。这标志着英超争冠格局的进一步明朗化，以及保级战的残酷结局。
+2. **NFL选秀：门多萨成状元**：拉斯维加斯突袭者队以首轮第一顺位选中四分卫费尔南多·门多萨，其母亲与多发性硬化症抗争的故事成为焦点，凸显体育与个人奋斗的深度结合。
+3. **足总纪律委员会裁定红牌争议**：曼联对利桑德罗·马丁内斯因拉扯头发被罚下的上诉被驳回，委员会强调此类行为“不应被容忍”，为未来类似判罚树立了明确标准。
+
+**对行业或市场的影响判断：**
+- 英超争冠与保级悬念的提前终结，可能影响剩余赛事的商业吸引力与转播关注度，但曼城与阿森纳的冠军争夺仍将维持热度。
+- NFL选秀中门多萨的状元身份，将带动突袭者队相关商品销售与媒体曝光，同时其个人故事有助于联盟拓展非传统受众群体。
+- 足总对“拉扯头发”等非典型犯规的零容忍态度，将促使俱乐部和球员调整防守动作，并可能引发对现有规则解释的进一步讨论。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-体育">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/videos/c33lk6dx4pyo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Man City move top with win as Burnley relegation confirmed</a>
+                        </div>
+                        
+                        <div class="news-summary">Manchester City continue their charge towards the Premier League title with victory at Turf Moor to move Pep Guardiola&#39;s…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/c86ez7xelw1o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Man City interested in Fernandez - Friday&#39;s gossip</a>
+                        </div>
+                        
+                        <div class="news-summary">Enzo Fernandez is wanted by Manchester City, Aston Villa identify James Trafford as a potential Emiliano Martinez replac…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/48562191/las-vegas-raiders-2026-nfl-draft-help-quarterback-fernando-mendoza-rookie-year" target="_blank">What can the Raiders do to set No. 1 pick QB Fernando Mendoza up for success in Year 1?</a>
+                        </div>
+                        
+                        <div class="news-summary">From the coaching staff to the roster, here&#39;s how the Raiders can develop Fernando Mendoza.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/c4gxd39xyr0o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Sutton&#39;s predictions v Race Across the World podcast&#39;s Alfie Watts</a>
+                        </div>
+                        
+                        <div class="news-summary">Chris Sutton takes on Race Across the World podcast travel expert Alfie Watts plus the BBC readers and AI with his predi…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/athletics/videos/ckg0wg117gyo?at_medium=RSS&amp;at_campaign=rss" target="_blank">The FTD Brothers - racing the clock against dementia fate</a>
+                        </div>
+                        
+                        <div class="news-summary">BBC Sport speaks to Jordan and Cian Adams, the &#39;FTD Brothers&#39;. After the 2026 London Marathon, which Jordan will run car…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/cqxlnxp092jo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Hair pulling ought not to be tolerated - FA panel</a>
+                        </div>
+                        
+                        <div class="news-summary">An FA disciplinary panel explains why it rejected Manchester United&#39;s appeal against Lisandro Martinez&#39;s red card for pu…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/cqj85lrgv70o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Brobbey should have been sent off v Spurs - panel</a>
+                        </div>
+                        
+                        <div class="news-summary">Sunderland&#39;s Brian Brobbey should have been sent off for two yellow-card offences against Tottenham, a Premier League pa…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/czredr28g08o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Howe &#39;looks forward&#39; to talks with Newcastle owners</a>
+                        </div>
+                        
+                        <div class="news-summary">Head coach Eddie Howe says he is looking forward to sitting down with Newcastle United&#39;s owners next week to &#34;express th…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/american-football/articles/c98mr7zn3vdo?at_medium=RSS&amp;at_campaign=rss" target="_blank">The NFL&#39;s next superstar and how mum&#39;s struggle inspired rise to top</a>
+                        </div>
+                        
+                        <div class="news-summary">Fernando Mendoza was the first pick in the NFL Draft. His mother, who lives with MS, has been his main source of inspira…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/rugby-union/articles/cwywv2vndv5o?at_medium=RSS&amp;at_campaign=rss" target="_blank">The Women&#39;s Six Nations is faster and smarter - but is it better?</a>
+                        </div>
+                        
+                        <div class="news-summary">The women&#39;s Six Nations has evolved with coaches and players working harder and playing smarter</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/c5ywnkd7yxxo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Five things in the EFL: penultimate peril and jittery jeopardy</a>
+                        </div>
+                        
+                        <div class="news-summary">Here are five things to look out for across the EFL in this penultimate weekend of the regular season.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/cm293m3mr7zo?at_medium=RSS&amp;at_campaign=rss" target="_blank">How Lineker and Neville became rival media moguls</a>
+                        </div>
+                        
+                        <div class="news-summary">BBC sports editor Dan Roan examines how Gary Lineker and Gary Neville became two of the biggest players in a rapidly cha…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/american-football/videos/c203v07pw90o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Mendoza selected as first pick in NFL Draft</a>
+                        </div>
+                        
+                        <div class="news-summary">The Las Vegas Raiders select quarterback Fernando Mendoza as the first overall pick of the 2026 NFL Draft.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/cly60en2z94o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Millwall consider legal action over badge on KKK image</a>
+                        </div>
+                        
+                        <div class="news-summary">Millwall consider taking legal action after Westminster City Council used the club&#39;s badge on an illustration of a Ku Kl…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/cricket/articles/ckgre6vw7n5o?at_medium=RSS&amp;at_campaign=rss" target="_blank">Patel retires after &#39;disapproved&#39; league ban</a>
+                        </div>
+                        
+                        <div class="news-summary">Former England all-rounder Samit Patel announces his retirement from domestic cricket.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/ce3d69wngevo?at_medium=RSS&amp;at_campaign=rss" target="_blank">US rights groups urge caution for World Cup visitors</a>
+                        </div>
+                        
+                        <div class="news-summary">More than 120 organisations issue a travel advisory for visitors to this summer&#39;s World Cup, warning of potential threat…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/draft2026/story/_/id/48543025/nfl-mock-draft-2026-round-2-3-best-available-prospects-team-predictions" target="_blank">NFL mock draft of Rounds 2-3: Predicting landing spots for available prospects</a>
+                        </div>
+                        
+                        <div class="news-summary">Where will the best players still on the board land on Day 2? We projected the next 68 picks of the NFL draft.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/draft2026/story/_/id/48563612/2026-nfl-draft-best-team-fits-day-2-round-2-solak-teams-prospects-sleepers" target="_blank">The best team fits for Day 2: Solak finds 10 matches that need to happen</a>
+                        </div>
+                        
+                        <div class="news-summary">Anthony Hill Jr. to the Cowboys? Avieon Terrell to the Bengals? Here are some fits that make too much sense.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/olympics/articles/c4g81328ye8o?at_medium=RSS&amp;at_campaign=rss" target="_blank">LA 2028 Olympic cricket stadium in IPL proposal</a>
+                        </div>
+                        
+                        <div class="news-summary">The Olympic cricket stadium for LA 2028 could host Indian Premier League teams as part of their global expansion plans, …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/draft2026/story/_/id/48542689/2026-nfl-draft-first-round-picks-best-worst-trades-quarterbacks-surprises" target="_blank">Miller, Reid and Yates answer Round 1 questions: Perfect picks, reaches and shocking moves</a>
+                        </div>
+                        
+                        <div class="news-summary">What were the best and worst picks of Round 1? Which trades really stood out? And what can we expect going into Day 2?</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/draft2026/story/_/id/48544901/2026-nfl-draft-analysis-every-selection-257-picks-32-teams-fits" target="_blank">Analysis of every pick in the 2026 NFL draft</a>
+                        </div>
+                        
+                        <div class="news-summary">Get insights on all 32 teams&#39; draft picks from our NFL Nation reporters.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/golf/articles/cp86gg43r5go?at_medium=RSS&amp;at_campaign=rss" target="_blank">Korda takes Chevron lead as England&#39;s Rhodes impresses</a>
+                        </div>
+                        
+                        <div class="news-summary">American Nelly Korda takes a two shot lead at the Chevron Championship after the first round, with England&#39;s Mimi Rhodes…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/athletics/videos/clyx0k5dnyeo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Exclusive of the year? Gabby Logan interviews Daddy Pig</a>
+                        </div>
+                        
+                        <div class="news-summary">BBC Sport&#39;s Gabby Logan interviews Daddy Pig as he prepares to take on the London Marathon to raise money for the Nation…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/articles/cn0w49y475wo?at_medium=RSS&amp;at_campaign=rss" target="_blank">Who will win the title? Reporters, fans and pundits make their predictions</a>
+                        </div>
+                        
+                        <div class="news-summary">Will it be Manchester City or Arsenal for the Premier League title? BBC Sport gets pundits, reporters and fans to predic…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            BBCSport
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.bbc.com/sport/football/videos/cpwjj94ylk5o?at_medium=RSS&amp;at_campaign=rss" target="_blank">&#39;I try to stay happy&#39; - Trafford on tricky start to life at Man City</a>
+                        </div>
+                        
+                        <div class="news-summary">Manchester City goalkeeper James Trafford says he has not had &#34;the best possible outcome&#34; since joining the club.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/draft2026/story/_/id/48547294/2026-nfl-draft-kiper-round-1-winners-losers-value-picks-updates-best-available" target="_blank">Big winners, losers and value picks of Round 1: Kiper on a wild start to the NFL draft</a>
+                        </div>
+                        
+                        <div class="news-summary">Mel Kiper Jr. makes sense of the first round of the NFL draft, sizing up moves like the Makai Lemon, Caleb Downs and Ty …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/draft2026/story/_/page/nflnation48542313/2026-nfl-draft-live-updates-pros-cons-every-first-round-pick" target="_blank">Pick-by-pick takes on Round 1 of the NFL draft: How prospects fit with their new teams</a>
+                        </div>
+                        
+                        <div class="news-summary">Here&#39;s our NFL Nation reporters&#39; look at the biggest questions for each Round 1 pick and how every player fits.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/48575685/rams-select-qb-ty-simpson-no-13-pick-nfl-draft" target="_blank">Rams take Simpson, note &#39;this is Matthew&#39;s team&#39;</a>
+                        </div>
+                        
+                        <div class="news-summary">The Rams selected quarterback Ty Simpson with the 13th pick in the NFL draft Thursday night, though coach Sean McVay mad…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/48574585/raiders-take-fernando-mendoza-no-1-pick-nfl-draft" target="_blank">&#39;Ecstatic&#39; Mendoza goes to Raiders with top pick</a>
+                        </div>
+                        
+                        <div class="news-summary">The Raiders made it official Thursday night at the NFL draft, taking former Indiana star QB Fernando Mendoza with the No…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/48576281/eagles-trade-cowboys-pick-makai-lemon-no-20-nfl-draft" target="_blank">Amid Brown buzz, Eagles trade up for WR Lemon</a>
+                        </div>
+                        
+                        <div class="news-summary">The Eagles made a trade with the division rival Cowboys on Thursday night, selecting USC wide receiver Makai Lemon with …</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-娱乐">
+                <div class="cat-header" data-target="grid-娱乐">
+                    <span class="cat-icon">🎬</span>
+                    <span class="cat-name">娱乐</span>
+                    <span class="cat-count">20 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 娱乐领域每日综述
+
+今日娱乐领域动态活跃，呈现出多元化趋势：一方面，流媒体与电视行业面临用户流失与内容创新的双重挑战，如Charter流失5.1万付费电视用户；另一方面，国际影视节展（如Canneseries）成为新作发布与行业交流的核心平台，涌现出多部聚焦社会议题的纪录片与剧集。此外，K-Pop明星跨界影视与时尚领域，以及经典IP续作引发的文化争议，成为舆论焦点。
+
+**最重要事件：**
+1. **《迈克尔》传记片票房大爆**：迈克尔·杰克逊传记片《迈克尔》在美国预映票房高达1200-1300万美元，尽管影评不佳，但观众评分极高，海外市场已创多项纪录，显示出强大的粉丝基础与市场号召力。
+2. **《穿普拉达的女王2》角色引发亚洲争议**：续集中名为“Jin Chao”的角色被指强化亚裔刻板印象，引发日本、韩国、中国等地社交媒体强烈反弹，凸显好莱坞在全球化内容中需更谨慎处理文化敏感性问题。
+3. **Blackpink Jisoo获Canneseries新星奖**：Jisoo在Canneseries领取“Madame Figaro新星奖”后表示渴望尝试更多角色，标志K-Pop偶像向影视领域深度拓展的趋势，其个人影响力有望带动亚洲市场关注。
+
+**行业影响判断：**
+- **票房市场**：《迈克尔》的“口碑两极、票房大卖”现象，再次证明顶级IP与粉丝经济可超越传统影评体系，但长期依赖情怀消费存在风险。
+- **文化争议**：亚洲市场对《穿普拉达的女王2》的强烈反应，警示好莱坞需在全球化制作中加强文化顾问机制，避免因刻板印象损害品牌声誉与票房潜力。
+- **跨界趋势**：Jisoo等K-Pop明星进军影视，将加速娱乐产业“偶像-演员”双向流动，推动亚洲内容在国际流媒体平台上的曝光与投资。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-娱乐">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/business/digital/youtube-terminates-clavicular-channels-violations-1236573742/" target="_blank">YouTube Terminates Clavicular’s Channels for “Severe or Repeated Violations”</a>
+                        </div>
+                        
+                        <div class="news-summary">The “Looksmaxxing” influencer and streamer was hospitalized for a suspected overdose last week.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/tv/tv-features/half-man-baby-reindeer-comparisons-richard-gadd-hbo-1236568018/" target="_blank">‘Half Man’: Richard Gadd Breaks Down ‘Baby Reindeer’ Comparisons and Key Differences</a>
+                        </div>
+                        
+                        <div class="news-summary">The HBO and BBC limited series, which explores toxic masculinity among other themes, premieres Thursday as the creator-w…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/music/global/sxsw-london-music-program-2026-1236729647/" target="_blank">Yunjin, Gaia, Cure for Paranoia, BrokenPen and More Join SXSW London Music Lineup</a>
+                        </div>
+                        
+                        <div class="news-summary">South by Southwest London, which runs June 1-6, has unveiled its full music program, with special guests added to the li…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/business/business-news/charters-pay-tv-subscribers-first-quarter-1236574571/" target="_blank">Charter Loses 51,000 Pay TV Subscribers in First Quarter</a>
+                        </div>
+                        
+                        <div class="news-summary">The cable and internet giant has used new packaging and pricing efforts to better retain residential video subscribers a…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/global/camilla-lackberg-fjallbacka-murders-shadow-of-guilt-1236729644/" target="_blank">Sweden’s Queen of Crime Camilla Läckberg Talks ‘Fjällbacka Murders’-Based ‘Shadow of Guilt,’ Swooped on by Reinvent Yellow (EXCLUSIVE)</a>
+                        </div>
+                        
+                        <div class="news-summary">Camilla Läckberg, the Swedish Queen of Crime whose novels have sold more than 40 million copies across 60 countries, has…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/music/asia/blackpink-jisoo-acting-canneseries-rising-star-1236729637/" target="_blank">Blackpink’s Jisoo Determined to Play ‘Variety of Roles’ in the Future Following Rising Star Award at Canneseries: ‘It Makes Me Want to Work Harder’</a>
+                        </div>
+                        
+                        <div class="news-summary">Famously secretive star Jisoo – known as a member of Blackpink – met with journalists after receiving the Madame Figaro …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/movies/movie-news/devil-wears-prada-2-racism-backlash-asia-1236574540/" target="_blank">‘Devil Wears Prada 2’ Character Sparks Backlash in Asia: “What Made Them Think We’ll Find This Kind of Racism Funny?”</a>
+                        </div>
+                        
+                        <div class="news-summary">Social media users in Japan, South Korea, China, Hong Kong and elsewhere have reacted angrily to the character of Jin Ch…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/news/amanda-turnbull-rise-studios-inter-medya-turkish-caged-love-1236729615/" target="_blank">Amanda Turnbull’s Rise Studios’ Partnership With Inter Medya Spawns Turkish Series ‘Caged Love’</a>
+                        </div>
+                        
+                        <div class="news-summary">Dubai-based Rise Studios, which is headed by former Warner Bros. Discovery Middle East chief Amanda Turnbull, and Turkis…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/global/martin-zandvliet-canneseries-harvest-dr-sales-1236729602/" target="_blank">Oscar-Nominated Martin Zandvliet Talks Canneseries ‘Harvest,’ His ‘Succession’ With Tractors</a>
+                        </div>
+                        
+                        <div class="news-summary">Venerable Danish pubcaster DR Drama, behind “Borgen,” “The Killing&amp;#8221; and “Cry Wolf,” is set to thrill the audience …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/movies/movie-news/michael-jackson-biopic-box-office-1236573688/" target="_blank">Box Office: ‘Michael’ Soaring to Huge $12M-$13M in U.S. Previews Amid Over-the-Moon Audience Scores</a>
+                        </div>
+                        
+                        <div class="news-summary">The Michael Jackson biopic has already set a slew of records overseas since opening midweek. And  while reviews aren&#39;t g…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/lifestyle/lifestyle-news/law-roach-magnum-2026-cannes-runway-show-taste-architect-1236574520/" target="_blank">Law Roach Named Magnum’s Inaugural “Taste Architect,” Will Curate Runway Show in Cannes</a>
+                        </div>
+                        
+                        <div class="news-summary">Zendaya’s stylist will act as a creative director of Magnum’s Cannes activation, House of Magnum, on the Croisette: “Mag…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/film/news/cannes-acid-into-the-jaws-of-the-ogre-rediance-sales-1236728464/" target="_blank">Cannes ACID Doc ‘Into the Jaws of the Ogre,’ With Footage Shot in Iran Under Censorship, Lands at Rediance (EXCLUSIVE)</a>
+                        </div>
+                        
+                        <div class="news-summary">Beijing-based sales company Rediance has taken on international sales of &amp;#8220;Into the Jaws of the Ogre,&amp;#8221; the de…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/global/flanders-docu-surge-a-woman-was-killed-vrt-canneseries-1236729176/" target="_blank">From ‘A Woman Was Killed’ to ‘The Deal With Iran,’ ‘Godvergeten’: Flanders’ Docu Surge</a>
+                        </div>
+                        
+                        <div class="news-summary">At Canneseries, fiction and non-fiction projects hail from all corners of the globe. And, as Flanders features a strong …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/global/this-is-not-a-murder-mystery-dali-magritte-vrt-canneseries-1236729263/" target="_blank">A Whodunit Featuring Dali and Magritte, ‘This is Not a Murder Mystery’ Raises the Bar for Flanders</a>
+                        </div>
+                        
+                        <div class="news-summary">It takes a very special kind of creative mind to bridge surrealist art and whodunit TV productions. But it’s also fittin…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/global/lennart-stuyck-maarten-stuyck-vrt-canvas-canneseries-1236729117/" target="_blank">Canneseries Buzz Title ‘The Deal With Iran’:  A Deep Dive Into Realities of Hostage Diplomacy</a>
+                        </div>
+                        
+                        <div class="news-summary">Reality more often than not surpasses fiction: It is yet again the case with “The Deal with Iran”, a three-part Belgian …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/global/nordisk-film-production-reinvent-yellow-snake-killer-1236729581/" target="_blank">Nordisk Film Production, Reinvent Yellow Strike Distribution Deal on Prime Video’s ‘Snake Killer,’ TV2 Norway’s ‘Sogn Murders,’ Third Title (EXCLUSIVE)</a>
+                        </div>
+                        
+                        <div class="news-summary">Scandinavian major Nordisk Film Production and leading Nordic sales, financing and production outfit Reinvent Yellow hav…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/lifestyle/shopping/martha-stewart-kitchen-appliance-amazon-release-price-buy-1236572283/" target="_blank">Martha Stewart Expands Her Empire With First-Ever Kitchen Appliance Line</a>
+                        </div>
+                        
+                        <div class="news-summary">The April 2026 product launch welcomes a new category to Stewart&#39;s namesake home and lifestyle brand.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/tv/tv-features/matlock-season-2-finale-season-3-creator-interview-1236573526/" target="_blank">‘Matlock’ Boss Explains Season 2 Finale’s Dismantling and Hints at Season 3: “We’re Shaking Up the Pieces”</a>
+                        </div>
+                        
+                        <div class="news-summary">Creator Jennie Snyder Urman also talks about how the show handled David Del Rio’s dramatic departure, all those &#39;Jane th…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/tv/tv-news/zendaya-disney-reunion-euphoria-kc-undercover-1236573593/" target="_blank">Did You Miss Zendaya’s Disney Channel Reunion on New ‘Euphoria’ Episode?</a>
+                        </div>
+                        
+                        <div class="news-summary">Season three, episode two, of the hit HBO drama wasn&#39;t the first time the Emmy winner shared the screen with Kadeem Hard…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Fri, 24 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/tv/tv-news/summer-house-reunion-separate-segments-amanda-ciara-west-1236573726/" target="_blank">‘Summer House’ Season 10 Reunion Will Not Feature Separate Andy Cohen Interviews With Amanda, Ciara and West</a>
+                        </div>
+                        
+                        <div class="news-summary">The upcoming reunion episodes will not follow the same format shift that &#39;Vanderpump Rules&#39; season 10 implemented that s…</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-健康">
+                <div class="cat-header" data-target="grid-健康">
+                    <span class="cat-icon">🏥</span>
+                    <span class="cat-name">健康</span>
+                    <span class="cat-count">20 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 健康领域每日综述
+
+今日全球健康领域呈现“成就与危机并存”的复杂态势。一方面，多国在消除特定传染病（如艾滋、梅毒、沙眼、麻风病）方面取得里程碑式进展，彰显了公共卫生干预的长期成效；另一方面，地区冲突（中东、苏丹）与儿童死亡率下降放缓等严峻挑战，凸显了全球健康安全体系的脆弱性。同时，WHO在推动新诊断工具、完善大流行病协议以及强化“一体化健康”行动方面，展现了向战略转型的积极努力。
+
+**最重要事件：**
+1. **多国消除传染病获WHO认证：** 巴哈马、丹麦分别消除艾滋病毒母婴传播；利比亚和阿尔及利亚消除沙眼；智利成为美洲首个消除麻风病的国家。这些成就标志着全球在特定疾病防控上取得实质性突破。
+2. **全球儿童死亡率下降放缓：** 2024年仍有490万5岁以下儿童死亡，其中230万为新生儿。这一数据敲响警钟，表明在实现可持续发展目标方面，针对可预防死因的干预措施仍需加强。
+3. **冲突加剧中东与苏丹健康危机：** 中东地区因最新冲突导致卫生系统承压，而苏丹在三年战争后已成为全球最大人道主义危机，3400万人需要援助，医疗系统几近瘫痪。
+
+**对行业与市场的影响判断：**
+- **诊断与治疗市场迎来新机遇：** WHO推荐新的结核病诊断工具，以及多国消除传染病的成功，将推动相关检测、疫苗和药物的需求增长，尤其是在中低收入国家。
+- **人道主义医疗援助需求激增：** 冲突地区的健康危机将促使国际组织、非政府组织及医疗设备供应商加大对应急医疗物资、创伤救治和心理健康服务的投入。
+- **全球健康治理格局加速重塑：** 大流行病协议谈判的推进与“一体化健康”行动的落地，将促使各国政府及企业更注重跨部门协作与预防性投入，长期利好公共卫生基础设施与数字健康领域。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-健康">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Wed, 25 Fe</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/25-02-2026-who-director-general-visits-jordan-to-recognize-strong-collaboration-on-health-system-delivery--emergency-relief-and-advancing-mental-health" target="_blank">WHO Director-General visits Jordan to recognize strong collaboration on health system delivery, emergency relief and advancing mental health</a>
+                        </div>
+                        
+                        <div class="news-summary">The Director-General of the World Health Organization, Dr Tedros Adhanom Ghebreyesus, today concluded the first day of h…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Wed, 22 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/22-04-2026-who-certifies-the-bahamas-for-eliminating-mother-to-child-transmission-of-hiv" target="_blank">WHO certifies the Bahamas for eliminating mother-to-child transmission of HIV</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;In a landmark achievement for Caribbean public health, the World Health Organization (WHO) congratulates The Bahamas …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Wed, 18 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/18-03-2026-progress-in-reducing-child-deaths-slows-as-4.9-million-children-die-before-age-five" target="_blank">Progress in reducing child deaths slows as 4.9 million children die before age five</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;An estimated 4.9&amp;nbsp;million children died before their fifth birthday in 2024, including 2.3&amp;nbsp;million newborns,…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Wed, 18 Fe</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/18-02-2026-who-validates-elimination-of-trachoma-as-a-public-health-problem-in-libya" target="_blank">WHO validates elimination of trachoma as a public health problem in Libya</a>
+                        </div>
+                        
+                        <div class="news-summary">WHO today announced that Libya has eliminated trachoma as a public health problem, a landmark victory for public health …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Wed, 11 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/11-03-2026-conflict-deepens-health-crisis-across-middle-east--who-says" target="_blank">Conflict deepens health crisis across Middle East, WHO says</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;More than ten days into the latest escalation of conflict in the Middle East, health systems across the Region are co…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Wed, 04 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/04-03-2026-chile-becomes-the-first-country-in-the-americas-to-be-verified-by-who-for-the-elimination-of-leprosy" target="_blank">Chile becomes the first country in the Americas to be verified by WHO for the elimination of leprosy</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO), together with the Pan American Health Organization (PAHO), congratulates Chile for …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Tue, 24 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/24-03-2026-who-recommends-new-diagnostic-tools-to-help-end-tb" target="_blank">WHO recommends new diagnostic tools to help end TB</a>
+                        </div>
+                        
+                        <div class="news-summary">On World TB Day, the World Health Organization (WHO) is urging countries to accelerate action to end tuberculosis (TB) a…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Tue, 17 Fe</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/17-02-2026-global-commitment-on-display-as-countries-negotiate-key-annex-to-the-pandemic-agreement" target="_blank">Global commitment on display as countries negotiate key annex to the Pandemic Agreement</a>
+                        </div>
+                        
+                        <div class="news-summary">Member States of the World Health Organization (WHO) concluded a weeklong round of negotiations on draft annex for Patho…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Tue, 14 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/14-04-2026-after-three-years-of-conflict--sudan-faces-a-deeper-health-crisis" target="_blank">After three years of conflict, Sudan faces a deeper health crisis</a>
+                        </div>
+                        
+                        <div class="news-summary">After three years of war, Sudan now accounts for the world’s largest humanitarian crisis, with 34 million people needing…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Tue, 07 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/07-04-2026-who-and-france-shift-one-health-vision-to-action-with-new-high-impact-initiatives" target="_blank">WHO and France shift One Health vision to action with new high-impact initiatives</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO) and France hosted the One Health Summit on World Health Day 2026, announcing new ini…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Thu, 26 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/26-03-2026-encouraging-progress-in-inclusive-health-policies-for-refugees-and-migrants" target="_blank">Encouraging progress in inclusive health policies for refugees and migrants</a>
+                        </div>
+                        
+                        <div class="news-summary">WHO reports a major shift in how countries are responding to the health needs of refugees and migrants, with new data sh…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Thu, 26 Fe</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/27-02-2026-denmark-becomes-first-country-in-the-european-union-to-eliminate-of-mother-to-child-transmission-of-hiv-and-syphilis" target="_blank">Denmark becomes first country in the European Union to eliminate mother-to-child transmission of HIV and syphilis</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO) has certified Denmark for the elimination of mother-to-child transmission (EMTCT) of…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/23-04-2026-algeria-eliminates-trachoma-as-a-public-health-problem" target="_blank">Algeria eliminates trachoma as a public health problem</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO) has validated Algeria as having eliminated trachoma as a public health problem, maki…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Thu, 23 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/23-04-2026-who-reports-measurable-health-impact-in-2025-amid-transition-to-new-strategy" target="_blank">WHO reports measurable health impact in 2025 amid transition to new strategy</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;The World Health Organization (WHO) today released its &lt;a href=&#34;https://www.who.int/about/accountability/results/who-…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Thu, 09 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/09-04-2026-first-ever-who-forum-unites-800--collaborating-centres-for-stronger-scientific-collaboration" target="_blank">First-ever WHO Forum unites 800+ Collaborating Centres for stronger scientific collaboration</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO) has convened the historic first Global Forum of Collaborating Centres—one of the wor…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Sat, 28 Ma</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/28-03-2026-who-member-states-agree-to-extend-negotiations-on-key-annex-to-the-pandemic-agreement" target="_blank">WHO Member States agree to extend negotiations on key annex to the Pandemic Agreement</a>
+                        </div>
+                        
+                        <div class="news-summary">WHO Member States have agreed to extend negotiations on the Pathogen Access and Benefit Sharing (PABS) annex to the WHO …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Mon, 23 Fe</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/23-02-2026-attacks-on-ukraine-s-health-care-increased-by-20-in-2025" target="_blank">Attacks on Ukraine’s health care increased by 20% in 2025</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;p&gt;As Ukraine enters the fifth year of full-scale war, its people have endured the highest number of attacks on their he…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Mon, 06 Ap</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/06-04-2026-who-calls-for-action---together-for-health.-stand-with-science.--to-mark-world-health-day" target="_blank">WHO calls for action: “Together for health. Stand with science.” to mark World Health Day</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO) today calls on people everywhere to renew their commitment to working together and s…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Fri, 27 Fe</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/27-02-2026-recommendations-for-influenza-vaccine-composition-for-the-2026-2027-northern-hemisphere-season" target="_blank">Recommendations for influenza vaccine composition for the 2026-2027 northern hemisphere season</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO) today announced recommendations for the viral composition of influenza (or “flu”) va…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Fri, 13 Fe</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/13-02-2026-statement-on-the-planned-hepatitis-b-birth-dose-vaccine-trial-in-guinea-bissau" target="_blank">Statement on the planned hepatitis B birth dose vaccine trial in Guinea-Bissau</a>
+                        </div>
+                        
+                        <div class="news-summary">WHO statement on a planned hepatitis B birth dose vaccine trial in Guinea-Bissau.</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- FOOTER -->
+        <div class="page-footer">
+            Generated by Daily News AI Aggregator &middot; 2026-04-24
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" title="回到顶部">↑</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ===== Markdown 渲染 =====
+            const overviewContents = document.querySelectorAll('.overview-content');
+            overviewContents.forEach(function(element) {
+                const markdown = element.innerHTML;
+                const html = marked.parse(markdown);
+                element.innerHTML = html;
+            });
+
+            // ===== 暗色模式 =====
+            const themeToggle = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.dataset.theme = 'dark';
+                themeToggle.textContent = '🌙';
+            }
+            themeToggle.addEventListener('click', function() {
+                const isDark = document.documentElement.dataset.theme === 'dark';
+                document.documentElement.dataset.theme = isDark ? '' : 'dark';
+                localStorage.setItem('theme', isDark ? '' : 'dark');
+                themeToggle.textContent = isDark ? '☀️' : '🌙';
+            });
+
+            // ===== 分类折叠 =====
+            const headers = document.querySelectorAll('.cat-header');
+            headers.forEach(function(header) {
+                const gridId = header.dataset.target;
+                const grid = document.getElementById(gridId);
+                if (!grid) return;
+                const chevron = header.querySelector('.cat-chevron');
+                // 恢复折叠状态
+                const collapsed = localStorage.getItem('collapse-' + gridId);
+                if (collapsed === 'true') {
+                    grid.classList.add('collapsed');
+                    chevron.classList.add('collapsed');
+                }
+                // 计算并设置 max-height
+                function updateMaxHeight() {
+                    if (!grid.classList.contains('collapsed')) {
+                        grid.style.maxHeight = grid.scrollHeight + 80 + 'px';
+                    }
+                }
+                updateMaxHeight();
+                header.addEventListener('click', function() {
+                    const isCollapsed = grid.classList.toggle('collapsed');
+                    chevron.classList.toggle('collapsed');
+                    localStorage.setItem('collapse-' + gridId, isCollapsed);
+                    if (!isCollapsed) {
+                        grid.style.maxHeight = grid.scrollHeight + 80 + 'px';
+                    }
+                });
+            });
+
+            // ===== 分类导航高亮 =====
+            const navLinks = document.querySelectorAll('.cat-nav-link');
+            const sections = document.querySelectorAll('.category-section');
+            if (navLinks.length && sections.length) {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id;
+                            navLinks.forEach(function(link) {
+                                link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                            });
+                        }
+                    });
+                }, { rootMargin: '-100px 0px -60% 0px' });
+                sections.forEach(function(section) { observer.observe(section); });
+            }
+
+            // ===== 回到顶部 =====
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                backToTop.classList.toggle('visible', window.scrollY > 200);
+            });
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ===== 导航栏平滑滚动 =====
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
