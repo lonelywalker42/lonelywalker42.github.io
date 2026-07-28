@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily News Briefing - 2026-07-28</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        :root {
+            --ink: #1a1a1a;
+            --paper: #faf8f5;
+            --accent: #c0392b;
+            --accent2: #2c3e50;
+            --rule: #d4c5a9;
+            --muted: #7f8c8d;
+            --highlight: #fdf2e9;
+            --card-bg: #ffffff;
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            --nav-bg: rgba(250, 248, 245, 0.95);
+            --ticker-bg: #1a1a1a;
+            --ticker-text: #faf8f5;
+            --footer-bg: #1a1a1a;
+            --footer-text: #faf8f5;
+        }
+
+        [data-theme="dark"] {
+            --ink: #e8e0d8;
+            --paper: #1a1a1e;
+            --accent: #e74c3c;
+            --accent2: #5dade2;
+            --rule: #3a3a3e;
+            --muted: #888890;
+            --highlight: #2a2a2e;
+            --card-bg: #222226;
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            --nav-bg: rgba(26, 26, 30, 0.95);
+            --ticker-bg: #2a2a2e;
+            --ticker-text: #e8e0d8;
+            --footer-bg: #2a2a2e;
+            --footer-text: #e8e0d8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #e8e4df;
+            color: var(--ink);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        [data-theme="dark"] body {
+            background: #121216;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+
+        /* ===== DARK MODE TOGGLE ===== */
+        .theme-toggle {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 1000;
+            background: var(--paper);
+            border: 1px solid var(--rule);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: background 0.3s, transform 0.2s;
+            color: var(--ink);
+        }
+        .theme-toggle:hover { transform: scale(1.1); }
+
+        /* ===== MASTHEAD ===== */
+        .masthead {
+            padding: 28px 40px 20px;
+            border-bottom: 4px double var(--ink);
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .masthead-date {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .masthead h1 {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            line-height: 1.2;
+        }
+        .masthead-sub {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+        .masthead-rule {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 12px auto 0;
+            transition: background 0.3s;
+        }
+
+        /* ===== TICKER BAR ===== */
+        .ticker {
+            background: var(--ticker-bg);
+            color: var(--ticker-text);
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .ticker span { opacity: 0.8; }
+        .ticker strong { color: var(--accent); font-weight: 700; }
+
+        /* ===== CATEGORY NAV ===== */
+        .cat-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--rule);
+            padding: 0 40px;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .cat-nav::-webkit-scrollbar { display: none; }
+        .cat-nav-link {
+            flex-shrink: 0;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--muted);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .cat-nav-link:hover { color: var(--ink); }
+        .cat-nav-link.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* ===== CONTENT ===== */
+        .content {
+            padding: 24px 40px 40px;
+        }
+
+        /* ===== CATEGORY SECTION ===== */
+        .category-section {
+            margin-bottom: 36px;
+            page-break-inside: avoid;
+        }
+        .category-section + .category-section {
+            border-top: 1px solid var(--rule);
+            padding-top: 28px;
+            transition: border-color 0.3s;
+        }
+
+        .cat-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 8px;
+            cursor: pointer;
+            user-select: none;
+            transition: border-color 0.3s;
+        }
+        .cat-header:hover .cat-name { opacity: 0.7; }
+        .cat-icon { font-size: 22px; }
+        .cat-name {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            transition: opacity 0.2s;
+        }
+        .cat-count {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            margin-left: auto;
+            transition: color 0.3s;
+        }
+        .cat-chevron {
+            font-size: 12px;
+            color: var(--muted);
+            transition: transform 0.3s;
+            margin-left: 8px;
+        }
+        .cat-chevron.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 20px;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .news-grid.collapsed {
+            max-height: 0 !important;
+            padding-bottom: 0;
+        }
+
+        /* ===== OVERVIEW BOX ===== */
+        .overview {
+            background: var(--highlight);
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.9;
+            color: var(--ink);
+            transition: background 0.3s, color 0.3s;
+        }
+        .overview-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .overview-content h1, .overview-content h2, .overview-content h3 {
+            margin-top: 12px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .overview-content p { margin-bottom: 8px; }
+        .overview-content ul, .overview-content ol {
+            margin-left: 20px;
+            margin-bottom: 8px;
+            padding-left: 0;
+        }
+        .overview-content li {
+            margin-bottom: 4px;
+            padding-left: 4px;
+        }
+        .overview-content strong {
+            font-weight: 700;
+            color: var(--accent2);
+            transition: color 0.3s;
+        }
+
+        /* ===== NEWS ITEM ===== */
+        .news-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--rule);
+            transition: background 0.2s, border-color 0.3s;
+            border-radius: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .news-item:last-child { border-bottom: none; }
+        .news-item:hover {
+            background: var(--highlight);
+            transform: translateY(-1px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .news-source {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+        .news-published {
+            font-size: 10px;
+            color: var(--muted);
+            margin-left: 8px;
+            font-weight: 400;
+        }
+        .news-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .news-title a {
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .news-title a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .news-summary {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* ===== LEAD STORY (first item in each section) ===== */
+        .news-grid .news-item:first-child {
+            grid-column: 1 / -1;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 14px;
+            margin-bottom: 4px;
+        }
+        .news-grid .news-item:first-child .news-title {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .back-to-top:hover { background: #e74c3c; }
+
+        /* ===== FOOTER ===== */
+        .page-footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            .theme-toggle, .cat-nav, .back-to-top, .cat-chevron { display: none !important; }
+            .cat-header { cursor: default; }
+            .news-grid { max-height: none !important; }
+            .page { box-shadow: none; max-width: 100%; }
+            body { background: #fff; color: #000; }
+            .masthead h1 { font-size: 28px; }
+            .news-item { break-inside: avoid; }
+            .news-item:hover { background: none; transform: none; box-shadow: none; }
+            .news-title a { color: #000; border-bottom: 1px dotted #999; }
+            .news-title a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 10px;
+                color: #666;
+                font-weight: 400;
+            }
+            .overview { background: #f8f8f8; border-left-color: #333; }
+            .cat-nav { position: static; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .masthead { padding: 20px 16px 16px; }
+            .masthead h1 { font-size: 28px; letter-spacing: 4px; }
+            .ticker { padding: 8px 16px; flex-wrap: wrap; gap: 4px; }
+            .cat-nav { padding: 0 16px; }
+            .content { padding: 16px 16px 28px; }
+            .news-grid { grid-template-columns: 1fr; }
+            .news-grid .news-item:first-child { grid-column: 1; }
+            .theme-toggle { top: 8px; right: 8px; width: 36px; height: 36px; font-size: 16px; }
+            .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+        }
+        @media (max-width: 480px) {
+            .masthead h1 { font-size: 22px; letter-spacing: 2px; }
+            .cat-name { font-size: 18px; }
+            .ticker { font-size: 10px; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="page">
+        <!-- DARK MODE TOGGLE -->
+        <button class="theme-toggle" id="themeToggle" title="切换暗色模式" aria-label="切换暗色模式">☀️</button>
+
+        <!-- MASTHEAD -->
+        <div class="masthead">
+            <div class="masthead-date">2026-07-28</div>
+            <h1>DAILY BRIEFING</h1>
+            <div class="masthead-sub">AI-Powered News Digest</div>
+            <div class="masthead-rule"></div>
+        </div>
+
+        <!-- TICKER -->
+        <div class="ticker">
+            <span><strong>99</strong> articles from <strong>13</strong> sources</span>
+            <span>5 categories</span>
+            <span>Generated 08:02:09</span>
+        </div>
+
+        <!-- CATEGORY NAV -->
+        <nav class="cat-nav" id="catNav">
+            
+            <a class="cat-nav-link" href="#cat-科技">💻 科技</a>
+            
+            <a class="cat-nav-link" href="#cat-国际">🌍 国际</a>
+            
+            <a class="cat-nav-link" href="#cat-体育">⚽ 体育</a>
+            
+            <a class="cat-nav-link" href="#cat-娱乐">🎬 娱乐</a>
+            
+            <a class="cat-nav-link" href="#cat-健康">🏥 健康</a>
+            
+        </nav>
+
+        <!-- CONTENT -->
+        <div class="content">
+            
+            
+            <div class="category-section" id="cat-科技">
+                <div class="cat-header" data-target="grid-科技">
+                    <span class="cat-icon">💻</span>
+                    <span class="cat-name">科技</span>
+                    <span class="cat-count">30 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 科技领域每日综述
+
+今日科技领域动态活跃，AI安全与基础设施成为焦点，微软、亚马逊等巨头纷纷加码布局。同时，汽车、娱乐与金融科技领域也迎来重要进展，但安全漏洞与用户信任问题持续引发关注。
+
+**最重要事件：**
+1. **微软发布AI安全模型与工具**：微软推出首个AI安全模型及全新网络安全平台，宣称其工具在性能和成本上优于竞争对手，进一步强化了AI在安全领域的应用。
+2. **亚马逊扩大卫星网络计划**：亚马逊宣布扩展其卫星移动通信网络，旨在与SpaceX的Starlink直接竞争，可能重塑全球卫星互联网市场格局。
+3. **岚图发布追光S并获预售佳绩**：岚图汽车推出FUV追光S，售价30.99万元，预售一小时订单破万，但市场对其从订单到实际销量的转化仍存疑虑。
+
+**行业影响判断：**
+AI安全工具的密集发布表明，科技巨头正加速将AI能力转化为商业化安全解决方案，这可能推动企业安全预算向AI驱动型产品倾斜。亚马逊与SpaceX的卫星网络竞争将加剧，有望降低卫星通信成本并扩大覆盖范围。岚图的预售成绩虽亮眼，但汽车行业“订单虚高”现象频发，其后续交付与市场表现仍需观察。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-科技">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            爱范儿
+                            
+                            <span class="news-published">Sat, 25 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.ifanr.com/1673113?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=" target="_blank">30.99 万元！岚图发布 FUV 追光 S，预售一小时订单破万</a>
+                        </div>
+                        
+                        <div class="news-summary">但从订单到销量，岚图还有一段路要走。&lt;p&gt;#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。&lt;/p&gt;</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2224633/x-money-begins-limited-us-rollout/" target="_blank">X Money begins limited US rollout</a>
+                        </div>
+                        
+                        <div class="news-summary">Only Premium and Premium X subscribers get the privilege of banking with Elon for now.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ArsTechnica
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://arstechnica.com/security/2026/07/microsoft-unveils-ai-security-tools-it-says-outperform-competing-platforms/" target="_blank">Microsoft unveils AI security tools it says outperform competing platforms</a>
+                        </div>
+                        
+                        <div class="news-summary">Microsoft says tools cost less than competing ones and outperform them, too.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive/" target="_blank">Satya Nadella says companies that trust one AI for everything may not survive</a>
+                        </div>
+                        
+                        <div class="news-summary">Companies without their own models — or without a layer of AI infrastructure known as AI gateways to separate their prom…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/thea-energy-lands-20m-federal-grant-to-build-its-magnets-for-fusion-reactors/" target="_blank">Thea Energy lands $20M federal grant to build its magnets for fusion reactors</a>
+                        </div>
+                        
+                        <div class="news-summary">Fusion power startup Thea Energy snagged a $20 million award from ARPA-E to scale production of its high-temperature sup…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/as-rivals-chase-acquisitions-peacock-bets-on-bundles-through-a-new-deal-with-youtube/" target="_blank">As rivals chase acquisitions, Peacock bets on bundles through a new deal with YouTube</a>
+                        </div>
+                        
+                        <div class="news-summary">The deal means content will be integrated into the YouTube experience, allowing viewers to discover and watch Peacock co…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2224515/spotify-is-experiencing-another-major-outage/" target="_blank">Spotify experienced another major outage</a>
+                        </div>
+                        
+                        <div class="news-summary">Two gremlins rolled through Spotify today.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" target="_blank">PSA: Your Claude shared chats and Artifacts may have ended up on Google</a>
+                        </div>
+                        
+                        <div class="news-summary">The issue appears to have originated from Claude’s “share chat” feature, which allows users to create links that enable …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2224488/ios26-6-macos26-6-and-the-rest-are-out-addressing-security-fixes/" target="_blank">iOS 26.6, macOS 26.6 and the rest are out, addressing security fixes</a>
+                        </div>
+                        
+                        <div class="news-summary">Apple&#39;s latest software updates are primarily focused on security fixes.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/microsoft-launches-its-first-cyber-model-and-a-new-agentic-cybersecurity-system/" target="_blank">Microsoft launches its first cybersecurity model, plus a new agentic cybersecurity system</a>
+                        </div>
+                        
+                        <div class="news-summary">Microsoft bolstered its AI cybersecurity offerings this week with the launch of its first AI security model and a new se…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2222968/google-pixel-11-launch-event-price-increase-rumors/" target="_blank">Google Pixel 11 launch event: Everything we expect as price increase rumors grow</a>
+                        </div>
+                        
+                        <div class="news-summary">Here&#39;s what the rumor mill tells us Google might be preparing for its next Pixel launch.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/apple-sued-after-alleged-app-store-crypto-scam-cost-users-1-8m/" target="_blank">Apple sued after alleged App Store crypto scam cost users $1.8M</a>
+                        </div>
+                        
+                        <div class="news-summary">Apple is facing a lawsuit from three users who say they collectively lost more than $1.8 million after downloading a fra…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/amazons-new-satellite-network-for-mobile-phones-could-turn-up-the-heat-on-spacex/" target="_blank">Amazon’s new satellite network for mobile phones could turn up the heat on SpaceX</a>
+                        </div>
+                        
+                        <div class="news-summary">Amazon is expanding its plans for providing satellite connectivity to mobile phones.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            InfoQ
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.infoq.cn/video/hTlgBWF6rgBKDi7TEb7i?utm_source=rss&amp;utm_medium=article" target="_blank">圆桌访谈：当 AI Coding 成为日常，开发者真正该关心什么？</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;div align=&#34;right&#34;&gt;&lt;a href=&#34;https://www.infoq.cn/video/hTlgBWF6rgBKDi7TEb7i?utm_source=rss&amp;amp;utm_medium=article&#34;&gt;点击查看原…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            InfoQ
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.infoq.cn/article/BjNkMC0utTMMzATPzkdC?utm_source=rss&amp;utm_medium=article" target="_blank">企业架构师常犯的 5 个语义建模误区以及破解方法 ｜ 技术实践</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;div align=&#34;right&#34;&gt;&lt;a href=&#34;https://www.infoq.cn/article/BjNkMC0utTMMzATPzkdC?utm_source=rss&amp;amp;utm_medium=article&#34;&gt;点击查…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/antares-raises-470m-to-build-nuclear-reactors-for-the-u-s-military/" target="_blank">Antares raises $470M to build nuclear reactors for the US military</a>
+                        </div>
+                        
+                        <div class="news-summary">Antares has raised $470 million to build small modular reactors — 100 kW to 1 MW — for U.S. Air Force bases.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            少数派
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://sspai.com/post/112785" target="_blank">派评 | 近期值得关注的 App</a>
+                        </div>
+                        
+                        <div class="news-summary">&gt;下载少数派2.0客户端、关注少数派公众号，解锁全新阅读体验📰&gt;实用、好用的正版软件，少数派为你呈现🚀&lt;a href=&#34;https://sspai.com/post/112785&#34; target=&#34;_blank&#34;&gt;查看全文&lt;/a&gt;</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2219836/difference-between-usb-3-0-and-2-0-which-to-use/" target="_blank">What&#39;s the difference between USB 3.0 &amp; 2.0 and which should you use?</a>
+                        </div>
+                        
+                        <div class="news-summary">The ports look the same, but one is much faster than the other.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control/" target="_blank">OpenAI’s Hugging Face breach has reignited the debate over alignment and control</a>
+                        </div>
+                        
+                        <div class="news-summary">OpenAI&#39;s Hugging Face breach has reignited debate over AI alignment and control, exposing competing views on whether inc…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            InfoQ
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.infoq.cn/article/hJjOFog5ObigvYFod90j?utm_source=rss&amp;utm_medium=article" target="_blank">GitLab 将碳足迹意识融入 CI/CD，以衡量软件交付的环境成本</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;div align=&#34;right&#34;&gt;&lt;a href=&#34;https://www.infoq.cn/article/hJjOFog5ObigvYFod90j?utm_source=rss&amp;amp;utm_medium=article&#34;&gt;点击查…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2224233/amazon-wants-to-deploy-5105-satellites-for-its-direct-to-mobile-service/" target="_blank">Amazon wants to deploy 5,105 satellites for its direct-to-mobile service</a>
+                        </div>
+                        
+                        <div class="news-summary">Amazon&#39;s Leo subsidiary has launched more than 390 satellites so far and plans to launch thousands more.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            InfoQ
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.infoq.cn/article/e5SNCwkIFNXylsQOEaQ6?utm_source=rss&amp;utm_medium=article" target="_blank">从固定编排到自进化蜂群：EvoMap 如何让 Agent 继承经验｜AICon深圳</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;div align=&#34;right&#34;&gt;&lt;a href=&#34;https://www.infoq.cn/article/e5SNCwkIFNXylsQOEaQ6?utm_source=rss&amp;amp;utm_medium=article&#34;&gt;点击查…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2224217/youtube-premium-will-soon-include-peacock-at-no-extra-cost/" target="_blank">YouTube Premium will soon include Peacock at no extra cost</a>
+                        </div>
+                        
+                        <div class="news-summary">Ad-supported Peacock will be available for free to YouTube Premium subscribers early next year.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            InfoQ
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.infoq.cn/article/1YYoykV4gk0eRGE5HpTO?utm_source=rss&amp;utm_medium=article" target="_blank">快手从 ClickHouse 到 Apache Doris 的百 PB 数据、200+集群迁移实践</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;div align=&#34;right&#34;&gt;&lt;a href=&#34;https://www.infoq.cn/article/1YYoykV4gk0eRGE5HpTO?utm_source=rss&amp;amp;utm_medium=article&#34;&gt;点击查…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            InfoQ
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.infoq.cn/article/vhx0VYNXpieSIuq0YIR6?utm_source=rss&amp;utm_medium=article" target="_blank">从Token到任务：Agentic AI 如何改变基础设施的关注焦点</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;div align=&#34;right&#34;&gt;&lt;a href=&#34;https://www.infoq.cn/article/vhx0VYNXpieSIuq0YIR6?utm_source=rss&amp;amp;utm_medium=article&#34;&gt;点击查…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            TechCrunch
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://techcrunch.com/2026/07/27/threads-users-can-now-chat-with-meta-ai-in-their-dms/" target="_blank">Threads users can now chat with Meta AI in their DMs</a>
+                        </div>
+                        
+                        <div class="news-summary">Meta on Monday said it is rolling out its Meta AI chatbot within Threads&#39; DMs, giving users a way to chat with the AI as…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2219835/iphone-stuck-in-sos-mode-how-to-fix/" target="_blank">Is your iPhone stuck in SOS mode? Here&#39;s how to fix it</a>
+                        </div>
+                        
+                        <div class="news-summary">Have you tried turning it off and on again?</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Engadget
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.engadget.com/2224141/best-headphones-wireless-bluetooth-120543205/" target="_blank">Best wireless headphones for 2026</a>
+                        </div>
+                        
+                        <div class="news-summary">Here&#39;s a list of the best wireless headphones you can buy right now, as reviewed by Engadget editors.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            InfoQ
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.infoq.cn/video/ZTqtrHdYa75f8FhvVOIR?utm_source=rss&amp;utm_medium=article" target="_blank">圆桌访谈：为了钱包考虑，你必须关注的 Agent 基础设施</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;div align=&#34;right&#34;&gt;&lt;a href=&#34;https://www.infoq.cn/video/ZTqtrHdYa75f8FhvVOIR?utm_source=rss&amp;amp;utm_medium=article&#34;&gt;点击查看原…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            InfoQ
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.infoq.cn/article/gkXGgedf2YZCM6mhxCv8?utm_source=rss&amp;utm_medium=article" target="_blank">跨境电商也“招” AI 员工了？模力工场×InfoQ×数势科技，共办龙岗跨境电商 AI 闭门峰会</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;div align=&#34;right&#34;&gt;&lt;a href=&#34;https://www.infoq.cn/article/gkXGgedf2YZCM6mhxCv8?utm_source=rss&amp;amp;utm_medium=article&#34;&gt;点击查…</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-国际">
+                <div class="cat-header" data-target="grid-国际">
+                    <span class="cat-icon">🌍</span>
+                    <span class="cat-name">国际</span>
+                    <span class="cat-count">6 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 每日国际综述
+
+今日国际动态呈现多重焦点：地区冲突出现短暂缓和迹象，但全球安全形势依然严峻；南亚地区年轻一代的政治觉醒正挑战传统精英阶层；环境与文化遗产保护议题持续升温，同时极端天气引发的自然灾害仍在肆虐。整体而言，国际社会在冲突管控、代际政治变革与气候应对之间艰难寻求平衡。
+
+**最重要事件：**
+1. **美伊冲突出现外交转机**：美国在持续近两周的猛烈空袭后暂停对伊朗的军事行动，双方通过外交渠道传递信息，试图避免全面战争。此举为中东紧张局势带来短暂降温窗口，但根本矛盾未解，后续走向仍存变数。
+2. **南亚“Z世代”政治觉醒**：南亚地区年轻一代正通过社交媒体和街头运动挑战长期固化的精英统治，将人口红利转化为政治压力。这一趋势可能重塑该地区未来数年的权力格局，对印度、巴基斯坦等国选举政治产生深远影响。
+3. **欧洲野火与文化遗产保护**：法国吉伦特省野火持续肆虐，西班牙中部大火初步受控，第四波热浪即将来袭；与此同时，美国奥克弗诺基沼泽被列入联合国教科文组织世界遗产名录，凸显气候变化下生态保护与灾害应对的紧迫矛盾。
+
+**行业与市场影响判断：**
+- **能源与地缘风险**：美伊停火信号短期内缓解了中东原油供应中断的担忧，但若外交努力失败，油价可能再度飙升。全球航运和保险业需警惕霍尔木兹海峡通行风险。
+- **政治与消费趋势**：南亚年轻选民的政治参与度上升，可能推动科技、教育及就业领域的政策改革，相关市场（如数字支付、在线教育）有望受益。同时，精英阶层传统投资领域（如房地产、奢侈品）或面临监管压力。
+- **气候与保险业**：欧洲持续热浪与野火加剧了农业、林业和旅游业的损失，保险公司面临赔付激增压力。世界遗产地的增加则可能带动生态旅游投资，但需配套更严格的防灾规划。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-国际">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Sun, 26 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/07/26/nx-s1-5890876/breakfasts-around-the-world-syrnyky-or-curd-cheese-hotcakes-in-ukraine" target="_blank">Breakfasts around the world: Syrnyky, or curd-cheese hotcakes in Ukraine</a>
+                        </div>
+                        
+                        <div class="news-summary">Everyone in Ukraine has a story about syrnyki, the tangy, curd-cheese pancakes that have been a breakfast staple for hun…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/07/27/nx-s1-5906359-e1/georgias-okefenokee-swamp-becomes-a-unesco-world-heritage-site" target="_blank">Georgia&#39;s Okefenokee Swamp becomes a UNESCO World Heritage site</a>
+                        </div>
+                        
+                        <div class="news-summary">The Okefenokee Swamp in Georgia has joined the list of UNESCO World Heritage sites.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/07/27/nx-s1-5908567/india-cockroach-movement-gen-z-south-asia" target="_blank">The &#39;cockroach&#39; in the machine: How Gen Z is rattling South Asia&#39;s elites</a>
+                        </div>
+                        
+                        <div class="news-summary">South Asia&#39;s leaders have long boasted about their demographic dividend. But the region&#39;s young people are turning it in…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/07/27/g-s1-135621/up-first-newsletter-mass-shooting-seattle-iran-us-war-democrats-senate-midterms" target="_blank">3 dead in mass shooting in Seattle. And, U.S. and Iran pause fighting</a>
+                        </div>
+                        
+                        <div class="news-summary">A mass shooting at a Seattle festival has left three people dead. And, the U.S. and Iran have been exchanging diplomatic…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/07/27/nx-s1-5909107/france-spain-wildfires-updates" target="_blank">France continues to fight devastating wildfires, while progress is made in Spain</a>
+                        </div>
+                        
+                        <div class="news-summary">In southern France, a wildfire in the region of Gironde is still active, while two major fires in central Spain are fina…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            NPR
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.npr.org/2026/07/27/g-s1-135611/can-the-u-s-and-iran-take-the-off-ramp" target="_blank">Can the U.S. and Iran take the off-ramp?</a>
+                        </div>
+                        
+                        <div class="news-summary">The U.S. military has paused its airstrikes on Iran after nearly two weeks of intensifying bombing, while diplomatic eff…</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-体育">
+                <div class="cat-header" data-target="grid-体育">
+                    <span class="cat-icon">⚽</span>
+                    <span class="cat-name">体育</span>
+                    <span class="cat-count">30 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 体育领域每日综述
+
+**整体动态与趋势：**  
+今日体育界呈现多重动态，涵盖足球转会、篮球签约、棒球伤病及网球退赛等热点。欧洲足坛转会市场活跃，曼城核心罗德里续约前景受关注，而利兹联接近创纪录签下门将特拉福德；NBA方面，76人正式签下勒布朗·詹姆斯引发轰动；MLB交易截止日临近，多支强队调整计划。此外，意大利足坛因主帅任命争议导致马尔蒂尼闪电辞职，凸显管理层动荡。
+
+**最重要事件：**  
+1. **76人签下勒布朗·詹姆斯**：勒布朗以两年800万美元老将底薪加盟76人，这一“国王加冕”式签约重塑东部争冠格局，76人瞬间成为总冠军热门。  
+2. **曼城核心罗德里续约博弈**：曼城对罗德里续约持乐观态度，但需警惕皇马潜在报价，若续约失败可能影响中场稳定性。  
+3. **马尔蒂尼辞职与意大利足坛震荡**：因技术总监马尔蒂尼不满未任命皮洛为主帅，上任仅16天即离职，暴露意大利足协内部决策混乱，或影响国家队重建。
+
+**行业/市场影响判断：**  
+- **足球转会市场**：利兹联创纪录交易及罗德里续约博弈显示英超俱乐部在关键位置投入加大，但皇马等豪门介入可能推高球员身价，加剧市场泡沫。  
+- **NBA格局**：勒布朗底薪加盟76人打破薪资平衡，可能引发其他球队效仿“巨星降薪抱团”模式，对联盟竞争公平性构成挑战。  
+- **MLB交易截止日**：勇士、费城人等强队积极调整阵容，预示下半赛季竞争白热化，交易市场或出现多笔重磅操作，影响分区排名。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-体育">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/golf/news/12040/13567598/pga-tour-lucas-glover-clears-up-aimpoint-speculation-after-removing-shoes-during-round" target="_blank">Glover quashes Aimpoint protest rumours following shoe removal</a>
+                        </div>
+                        
+                        <div class="news-summary">Lucas Glover insisted that kicking off his shoes during a recent PGA Tour event was to prevent spike marks, rather than …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/football/news/12040/13567581/rodri-transfer-news-man-city-hopeful-world-cup-winner-will-sign-new-deal-but-braced-for-real-madrid-bid-paper-talk" target="_blank">Papers: Man City hopeful Rodri will sign new deal - but braced for Real bid</a>
+                        </div>
+                        
+                        <div class="news-summary">The top stories and transfer rumours from Tuesday&#39;s newspapers...</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/cricket/news/12040/13567575/the-hundred-ollie-pope-hits-winning-runs-as-mi-london-edge-southern-brave-in-last-ball-thriller-at-southampton" target="_blank">Pope hits winning runs as MI London edge Southern Brave</a>
+                        </div>
+                        
+                        <div class="news-summary">Ollie Pope scored the winning runs with the last ball to take MI London to a dramatic three-wicket victory over Southern…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/tennis/news/12040/13567553/mubadala-dc-open-jack-draper-withdraws-from-dc-open-with-left-arm-injury-ahead-of-us-open-qualifying-campaign" target="_blank">Draper withdraws from DC Open with arm injury</a>
+                        </div>
+                        
+                        <div class="news-summary">Jack Draper has withdrawn from the DC Open with a left arm injury.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/football/news/12040/13567551/leeds-united-transfer-news-james-trafford-deal-moving-nearer-as-club-record-deal-close-to-being-reached-with-manchester-city" target="_blank">Leeds close to club-record deal for Trafford</a>
+                        </div>
+                        
+                        <div class="news-summary">Leeds United are close to agreeing a club-record deal with Manchester City for goalkeeper James Trafford.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/boxing/news/12040/13567541/tyson-fury-and-anthony-joshua-could-both-retire-after-they-finally-fight-this-year-says-heavyweight-rival-dillian-whyte" target="_blank">Whyte: Joshua and Fury could both retire after their fight</a>
+                        </div>
+                        
+                        <div class="news-summary">Dillian Whyte believes Tyson Fury and Anthony Joshua could both retire after their long-awaited fight this year.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/football/news/12040/13567544/john-stones-transfer-news-england-international-verbally-agrees-deal-to-join-inter-milan-amid-interest-from-arsenal-and-chelsea" target="_blank">Stones verbally agrees Inter move amid Arsenal, Chelsea interest</a>
+                        </div>
+                        
+                        <div class="news-summary">John Stones has verbally agreed to join Inter on a free transfer, according to Sky in Italy.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/mlb/story/_/id/49457076/mlb-2026-trade-deadline-nl-contenders-dodgers-brewers-cubs-braves-phillies" target="_blank">MLB trade deadline plans for the Braves, Phillies,...</a>
+                        </div>
+                        
+                        <div class="news-summary">Will the Brewers finally go big? Are the Braves all-in? Here&#39;s what to know about the other NL powerhouses&#39; deadline pla…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/football/news/12040/13567529/paolo-maldini-italian-football-federation-technical-director-quits-after-just-16-days-amid-head-coach-saga" target="_blank">Maldini quits as Italy technical director after 16 days over head coach saga</a>
+                        </div>
+                        
+                        <div class="news-summary">Paolo Maldini has left his role as technical director of the Italian Football Federation (FIGC) following the decision n…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/49465466/two-pro-bowl-dt-vita-vea-requests-trade-buccaneers" target="_blank">Vea requests trade from Bucs after stalled talks</a>
+                        </div>
+                        
+                        <div class="news-summary">Defensive tackle Vita Vea has requested a trade from the Tampa Bay Buccaneers after failed attempts at a contract extens…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/49462234/sources-wife-chiefs-eric-bieniemy-shot-couple-home" target="_blank">Sources: Bieniemy&#39;s wife shot at couple&#39;s home</a>
+                        </div>
+                        
+                        <div class="news-summary">The wife of Chiefs offensive coordinator Eric Bieniemy was allegedly shot by the couple&#39;s son Sunday night at the family…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/college-football/story/_/id/49461839/unc-football-gm-michael-lombardi-paid-administrative-leave" target="_blank">UNC places top Belichick aide Lombardi on leave</a>
+                        </div>
+                        
+                        <div class="news-summary">North Carolina football GM Michael Lombardi, a top aide to coach Bill Belichick, has been placed on paid administrative …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nba/story/_/id/49463246/76ers-celebrate-lebron-james-coronation-fit-hoops-king" target="_blank">76ers welcome LeBron with coronation fit for King</a>
+                        </div>
+                        
+                        <div class="news-summary">The 76ers and LeBron James announced Monday their two-year deal on the veteran&#39;s minimum for $8 million total was offici…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/49464454/patriots-brown-knows-vrabel-rip-comes-great-place" target="_blank">Brown knows Vrabel&#39;s rip comes from &#39;great place&#39;</a>
+                        </div>
+                        
+                        <div class="news-summary">A.J. Brown couldn&#39;t corral the first pass of camp from Drake Maye, which put him on the hot seat with Mike Vrabel. It re…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/mlb/story/_/id/49465288/yankees-lose-bellinger-4-6-weeks-hamstring-strain" target="_blank">Yankees lose Bellinger (hamstring) for 4-6 weeks</a>
+                        </div>
+                        
+                        <div class="news-summary">All-Star outfielder Cody Bellinger will be out four to six weeks due to a Grade 2 left hamstring strain.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/mens-college-basketball/story/_/id/49465457/owner-comments-typified-resources-unlv-needs-pastner-says" target="_blank">UNLV&#39;s Pastner clarifies request for team &#39;owner&#39;</a>
+                        </div>
+                        
+                        <div class="news-summary">In a statement posted on the program&#39;s social media channels, UNLV coach Josh Pastner on Monday clarified comments he ma…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/golf/story/_/id/49464903/lucas-glover-took-shoes-complaints-metal-spikes" target="_blank">Glover spikes explanation for removing golf shoes</a>
+                        </div>
+                        
+                        <div class="news-summary">Lucas Glover on Monday said he wasn&#39;t protesting AimPoint at the 3M Open but instead was responding to other complaints …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/49447669/2026-nfl-offseason-catchup-myles-garrett-aj-brown-travis-kelce-wedding-highlight" target="_blank">👀 From Garrett to Kelce: NFL offseason stories</a>
+                        </div>
+                        
+                        <div class="news-summary">With training camps opening across the NFL, here&#39;s a cheat sheet on what you might have missed this offseason.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/snooker/news/12040/13567523/ronnie-osullivan-sets-2028-deadline-to-beat-stephen-hendry-record-of-seven-world-snooker-championship-titles" target="_blank">O&#39;Sullivan sets deadline to win record eighth snooker world title</a>
+                        </div>
+                        
+                        <div class="news-summary">Ronnie O&#39;Sullivan has set himself a deadline of winning a record-breaking eighth World Snooker Championship by 2028 and …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/tennis/news/12040/13567528/us-open-novak-djokovic-and-aryna-sabalenka-among-confirmed-mixed-doubles-pairs-but-no-carlos-alcaraz-or-jannik-sinner-yet" target="_blank">Djokovic and Sabalenka team up for US Open mixed doubles, no Alcaraz or Sinner yet</a>
+                        </div>
+                        
+                        <div class="news-summary">Novak Djokovic and Aryna Sabalenka will pair up in the mixed doubles at the US Open.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/football/news/12040/13567501/goalkeeper-tactical-timeouts-trial-for-new-rule-proposed-after-premier-league-efl-wsl-and-fa-reach-agreement" target="_blank">English football proposes trial to tackle goalkeeper timeouts</a>
+                        </div>
+                        
+                        <div class="news-summary">The top leagues in English football are set to trial new measures designed to tackle goalkeeper tactical timeouts in the…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/nfl/story/_/id/49454392/nfl-2011-draft-class-defense-best-ever-watt-sherman-heyward-miller-jordan-peterson" target="_blank">Is 2011 the best defensive NFL draft class ever? C...</a>
+                        </div>
+                        
+                        <div class="news-summary">The 2011 defensive class included the likes of J.J. Watt and Patrick Peterson. But the argument for topping 1981 as the …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/college-football/story/_/id/49464412/bill-belicick-north-carolina-college-football-mike-lombardi" target="_blank">Mike Lombardi leave the latest cloud for Bill Beli...</a>
+                        </div>
+                        
+                        <div class="news-summary">Not much has gone well for Belichick since his arrival in Chapel Hill.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/cricket/news/12040/13567482/the-hundred-southern-brave-edge-mi-london-by-one-run-to-continue-unbeaten-start-in-thrilling-finish" target="_blank">Brave edge MI London by one run in thriller</a>
+                        </div>
+                        
+                        <div class="news-summary">Southern Brave edged MI London by one run in a thrilling encounter that came down to the last ball at the Utilita Bowl i…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/f1/news/12040/13567450/hungarian-gp-martin-brundle-on-relentless-lando-norris-oscar-piastri-carlos-sainz-incident-and-malaysia-return-to-f1-calendar" target="_blank">Brundle&#39;s verdict on &#39;relentless&#39; Norris, Piastri-Sainz incident and Malaysia return</a>
+                        </div>
+                        
+                        <div class="news-summary">The Hungarian Grand Prix was an entertaining way to finish the first part of the 2026 F1 season before the summer break.…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/netball/news/12040/13567453/commonwealth-games-england-bounce-back-from-australia-defeat-with-victory-against-malawi-in-glasgow" target="_blank">England bounce back from Australia defeat by breezing past Malawi in Glasgow</a>
+                        </div>
+                        
+                        <div class="news-summary">England bounced back from their Commonwealth Games Netball defeat at the hands of Australia with a much-needed victory a…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/wwe/story/_/id/49434532/wwe-summerslam-memorable-main-events-john-cena-cody-rhodes-hulk-hogan-randy-savage" target="_blank">From Hogan and Savage to Cody vs. Cena: Most memor...</a>
+                        </div>
+                        
+                        <div class="news-summary">As SummerSlam approaches, revisit the championship clashes, shocking twists and unforgettable WWE moments.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            SkySports
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.skysports.com/football/news/12040/13567555/chelsea-transfer-news-blues-interested-in-signing-jordan-henderson-36-after-holding-positive-talks-with-35-year-old-danny-welbeck" target="_blank">Chelsea interested in Henderson after holding positive talks with Welbeck</a>
+                        </div>
+                        
+                        <div class="news-summary">Chelsea are interested in signing Jordan Henderson from Brentford.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/college-football/story/_/id/49433834/100-games-explain-college-football-2026" target="_blank">100 games that explain college football in 2026</a>
+                        </div>
+                        
+                        <div class="news-summary">TV, realignment, stars and legends, postseason quarrels. Those themes have set up epic games and made the current sport.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            ESPN
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.espn.com/soccer/story/_/id/49462140/mls-power-rankings-robert-lewandowski-propel-chicago-fire-order" target="_blank">MLS Power Rankings: Can Lewandowski propel Chicago...</a>
+                        </div>
+                        
+                        <div class="news-summary">Two games into his MLS career, Robert Lewandowski has yet to win with the Chicago Fire, so where does that leave them in…</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-娱乐">
+                <div class="cat-header" data-target="grid-娱乐">
+                    <span class="cat-icon">🎬</span>
+                    <span class="cat-name">娱乐</span>
+                    <span class="cat-count">30 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 娱乐行业每日综述
+
+今日娱乐行业动态多元，涵盖大型IP活动、法律纠纷与行业倡议。整体趋势显示，IP内容在粉丝活动中持续占据主导，同时艺人维权与行业多元化支持成为焦点。此外，音乐领域跨界合作与区域性庆祝活动也展现出行业活力。
+
+**最重要事件：**
+1. **漫威与DC在Comic-Con 2026表现分化**：漫威凭借《Doomsday》等作品引发热议，而DC漫画在艾斯纳奖上大放异彩，凸显两大巨头在粉丝活动中的不同策略与影响力。
+2. **Ariana Grande因歌曲泄露起诉黑客**：歌手Ariana Grande正式起诉长期针对其核心圈的黑客攻击，导致数十首歌曲泄露，反映艺人数字资产保护问题的严峻性。
+3. **《木乃伊4》选角新进展**：演员Michael Johnston正洽谈加盟《木乃伊4》，与Brendan Fraser和Rachel Weisz合作，标志经典IP重启的进一步推进。
+
+**行业影响判断：**
+- IP内容仍是娱乐行业核心驱动力，但粉丝活动中的表现差异可能影响品牌长期价值。
+- 艺人法律维权行动增多，将推动行业加强数字安全与版权保护机制。
+- 经典IP重启与跨界合作（如音乐直播）显示行业在创新与怀旧之间寻求平衡，有望吸引多元受众。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-娱乐">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/movies/movie-news/marvel-lanterns-and-johnny-depp-comic-con-2026-1236657222/" target="_blank">Marvel, ‘Lanterns’ and Johnny Depp: Here’s What Hit (and Missed) at Comic-Con 2026</a>
+                        </div>
+                        
+                        <div class="news-summary">From &#39;Doomsday&#39; to &#39;Spaceballs&#39; to &#39;Blade Runner: 2099&#39; to DC Comics&#39; Eisners sweep, here&#39;s what generated buzz in San D…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/news/general-news/hunter-biden-nick-fuentes-interview-key-takeaways-1236657622/" target="_blank">Key Takeaways From Channel 5’s Hunter Biden and Nick Fuentes Interview</a>
+                        </div>
+                        
+                        <div class="news-summary">The nearly two-hour interview veered from a heated exchange over antisemitic jokes to unlikely common ground on Trump an…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/music/latin/natanael-cano-announces-stadium-tour-in-mexico-dates-1236303866/" target="_blank">Natanael Cano Announces Stadium Tour in Mexico: Here Are the First Confirmed Dates</a>
+                        </div>
+                        
+                        <div class="news-summary">Titled after his upcoming album, &lt;em&gt;Natanael Cano Vol. 1&lt;/em&gt;, the new trek by the “King of Corridos Tumbados” will mar…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/movies/movie-news/indie-film-grant-help-female-directors-shoot-celluloid-1236655915/" target="_blank">Indie Film Grant Seeks to Help Female Directors Shoot on Celluloid</a>
+                        </div>
+                        
+                        <div class="news-summary">Women Behind the Camera, the initiative behind the grant, is founded by filmmaker and actress Armida López.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/business/business-news/ariana-grande-sues-over-yearslong-hacking-campaign-music-1236657620/" target="_blank">Ariana Grande Sues Over Yearslong Hacking Campaign Targeting Inner Circle</a>
+                        </div>
+                        
+                        <div class="news-summary">The singer has had dozens of her songs leaked in recent years.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/music/rb-hip-hop/boosie-badazz-childhood-friend-reunion-watch-video-1236303869/" target="_blank">Watch Boosie Badazz Reunite With Childhood Friend in Heartwarming Video: ‘Back Like We Ain’t Never Separated!’</a>
+                        </div>
+                        
+                        <div class="news-summary">The reunion comes after the Louisiana rapper posted a video last month of himself reading an email he was going to send …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/lifestyle/lifestyle-news/spider-man-collectible-ping-pong-table-stan-lee-11-ravens-1236657585/" target="_blank">Custom ‘Spider-Man’-Inspired Ping-Pong Table With Stan Lee Signature Hits Market for Close to $500K</a>
+                        </div>
+                        
+                        <div class="news-summary">The one-of-a-kind collectible piece with a red spider web motif comes from 11 Ravens, a luxury gaming furniture maker th…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/film/news/mummy-4-michael-johnston-obsession-brendan-fraser-1236822219/" target="_blank">‘Obsession’ Star Michael Johnston in Talks to Join ‘The Mummy 4’ With Brendan Fraser and Rachel Weisz</a>
+                        </div>
+                        
+                        <div class="news-summary">&amp;#8220;Obsession&amp;#8221; star Michael Johnston is in early talks to join the fourth installment of &amp;#8220;The Mummy,&amp;#822…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/lists/d4vd-murder-case-timeline-celeste-rivas-hernandez-death/" target="_blank">D4vd Murder Case: A Timeline of the Investigation &amp; Charges Over Celeste Rivas Hernandez’s Death</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;em&gt;Billboard&lt;/em&gt; is tracking developments in the singer&#39;s criminal case for allegedly killing the 14-year-old and dism…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/tv/tv-features/the-chi-series-finale-lena-waithe-candid-interview-1236657570/" target="_blank">Closing Out ‘The Chi’: Lena Waithe Gets Candid About Giving Her Series an Ending Other Black Shows Don’t Always Get</a>
+                        </div>
+                        
+                        <div class="news-summary">After spending a decade working on the Showtime and Paramount+ hit, the creator opens up to The Hollywood Reporter about…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/movies/movie-news/obsession-star-michael-johnston-mummy-1236657591/" target="_blank">‘Obsession’ Star Michael Johnston in Early Talks to Join ‘The Mummy’ Sequel</a>
+                        </div>
+                        
+                        <div class="news-summary">He would join Brendan Fraser and Rachel Weisz in the Radio Silence feature.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/music/pop/tate-mcrae-new-posters-tease-lollapalooza-1236303835/" target="_blank">Tate McRae Sparks New Era Speculation Ahead of Lollapalooza</a>
+                        </div>
+                        
+                        <div class="news-summary">The pop star&#39;s latest social media moves have fans wondering if new music is on the way.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/music/music-news/fred-again-latin-mafia-mixtape-creation-livestream-mexico-1236303864/" target="_blank">Fred again.. &amp; Latin Mafia to Host Mixtape Production Livestream That Won’t End Until the Mixtape Is Done</a>
+                        </div>
+                        
+                        <div class="news-summary">The British producer and Mexican trio will start the stream 1 p.m. CT on July 28.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/music/latin/calibre-50-celebrates-number-1-hits-mazatlan-pop-up-moment-1236302646/" target="_blank">Calibre 50 Celebrates Its Historic 28th No. 1 Hit at Billboard’s First-Ever Mazatlán Pop-Up Moment</a>
+                        </div>
+                        
+                        <div class="news-summary">&lt;em&gt;Billboard&lt;/em&gt; hosted the event at the birthplace of banda music to honor the regional Mexican band.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/video/calibre-50-28th-no-1-hit-billboard-mazatlan-pop-up-moment/" target="_blank">Calibre 50 Celebrates Historic 28th No. 1 Hit at Billboard’s First-Ever Mazatlán Pop-Up Moment | Noticias Billboard</a>
+                        </div>
+                        
+                        <div class="news-summary">For the first time ever, Billboard brought its signature Pop-Up Moment beyond U.S. borders—landing in the vibrant, sun-s…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/pro/d4vd-stand-trial-celeste-rivas-hernandez-murder-case-judge/" target="_blank">D4vd Must Stand Trial in Celeste Rivas Hernandez Murder Case, Judge Rules</a>
+                        </div>
+                        
+                        <div class="news-summary">Prosecutors sufficiently established &#34;probable cause&#34; during a five-day preliminary hearing in the gruesome case.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/music/news/d4vd-to-stand-trial-in-murder-of-14-year-old-girl-1236817323/" target="_blank">D4vd Ordered to Stand Trial for Murder of 14-Year-Old Girl</a>
+                        </div>
+                        
+                        <div class="news-summary">A judge ruled that singer D4vd must stand trial for allegedly killing and dismembering a 14-year-old girl. On Monday, Lo…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/news/general-news/d4vd-will-face-trial-over-muder-allegations-1236657454/" target="_blank">D4vd Murder Case Will Go to Trial, Judge Rules</a>
+                        </div>
+                        
+                        <div class="news-summary">The singer, whose real name is David Burke, is accused of murdering 14-year-old ex-girlfriend Celeste Rivas Hernandez an…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/culture/product-recommendations/where-to-buy-affordable-tickets-to-bts-arirang-world-tour-1236162592/" target="_blank">BTS ARIRANG World Tour 2026: Here’s Where to Buy Affordable Last-Minute Tickets Online</a>
+                        </div>
+                        
+                        <div class="news-summary">The supergroup returns to the United States with more tour dates starting on Saturday (Aug. 1).</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/shopping/news/how-to-stream-shark-week-online-without-cable-1236822181/" target="_blank">How to Stream Shark Week Live Online Without Cable</a>
+                        </div>
+                        
+                        <div class="news-summary">Shark Week has officially returned, bringing another frenzy of great whites, makos and other underwater predators to Dis…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Billboard
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.billboard.com/music/music-news/john-mellencamp-trump-gulf-of-mexico-renaming-1236303772/" target="_blank">John Mellencamp Slams Trump’s ‘Stupid F–king Idea’ to Rename Gulf of Mexico While Singing a Rock Classic</a>
+                        </div>
+                        
+                        <div class="news-summary">The rocker paused in the middle of singing &#34;Pink Houses&#34; to make a jab at the president.</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/film/news/sean-astin-lord-of-the-rings-pay-low-sell-house-1236822084/" target="_blank">Sean Astin Says ‘I Had to Sell My House’ During ‘Lord of the Rings’ Era Because $250,000 Payday Was So Low: ‘I Negotiated Such a Small Amount on the Trilogy’</a>
+                        </div>
+                        
+                        <div class="news-summary">Sean Astin said in a new interview with The Guardian that he was forced to sell his house amid &amp;#8220;The Lord of the Ri…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/film/features/horror-movies-four-trends-comic-con-1236821740/" target="_blank">‘Bold Voice of Contemporary Horror’ Comic-Con Panelists Predict the Four Biggest Upcoming Trends in Genre Filmmaking</a>
+                        </div>
+                        
+                        <div class="news-summary">Horror is red-hot at the box office, but what is up next for the genre? Ideas flowed freely at the San Diego Comic-Con p…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/tv/tv-news/where-to-watch-game-day-murders-id-channel-streaming-free-1236657368/" target="_blank">Shaq Debuts First True Crime Docuseries ‘Game Day Murders’: Where to Watch the Six-Parter Online</a>
+                        </div>
+                        
+                        <div class="news-summary">Hosted by veteran sports broadcaster Lindsay Czarniak and executive produced by Shaquille O&#39;Neal, each episode investiga…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            HollywoodReporter
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.hollywoodreporter.com/movies/movie-news/jay-and-silent-bob-weed-farming-video-game-in-the-works-1236657425/" target="_blank">‘Jay and Silent Bob’ Marijuana Farming Game in the Works</a>
+                        </div>
+                        
+                        <div class="news-summary">The newly launched indie company Nitrate Games is backing the project, described as an &#34;adult cozy farm sim.&#34;</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/news/abc-fall-premiere-dates-1236821973/" target="_blank">ABC Sets Fall Premiere Dates for ‘Shark Tank,’ ‘Abbott Elementary,’ ‘DWTS’ and More</a>
+                        </div>
+                        
+                        <div class="news-summary">ABC has announced a slate of fall premiere dates. After some football kickoffs, &amp;#8220;Dancing With the Stars&amp;#8221; wil…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/tv/news/nbc-newlyweds-emma-meisel-ignacio-diaz-silverio-bill-oneill-1236822131/" target="_blank">NBC Comedy ‘Newlyweds’ Casts Emma Meisel, Ignacio Diaz-Silverio, Bill O’Neill</a>
+                        </div>
+                        
+                        <div class="news-summary">NBC&amp;#8217;s new multi-cam comedy &amp;#8220;Newlyweds&amp;#8221; has cast three new series regulars, Variety has learned. Emma M…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/film/global/canal-pact-invest-1-1-billion-french-european-films-1236822089/" target="_blank">Canal+ Seals Landmark Pact to Invest Nearly $1.1 Billion in French and European Films</a>
+                        </div>
+                        
+                        <div class="news-summary">Canal+ has reached a five-year deal with French cinema organizations which will see the pay-TV powerhouse invest nearly …</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/film/news/ryan-gosling-ghost-rider-movie-pitch-marvel-slows-output-1236821746/" target="_blank">Ryan Gosling Pitched His Own ‘Ghost Rider’ Movie to Marvel as Studio Slows Down Output to Restore Quality: ‘When Quantity Is So Much, You Get Spread Thin’</a>
+                        </div>
+                        
+                        <div class="news-summary">Marvel&amp;#8217;s buzzy Comic-Con presentation put two huge comic book movie tentpoles on the studio&amp;#8217;s 2028 release c…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            Variety
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://variety.com/2026/digital/news/buzzfeed-layoffs-employees-byron-allen-acquires-company-1236822122/" target="_blank">BuzzFeed Laying Off 35% of Its Employees After Byron Allen Takes Over Company</a>
+                        </div>
+                        
+                        <div class="news-summary">BuzzFeed is slashing its workforce on the heels of the digital media company&amp;#8217;s deal to sell a controlling ownershi…</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="category-section" id="cat-健康">
+                <div class="cat-header" data-target="grid-健康">
+                    <span class="cat-icon">🏥</span>
+                    <span class="cat-name">健康</span>
+                    <span class="cat-count">3 STORIES</span>
+                    <span class="cat-chevron">▼</span>
+                </div>
+
+                
+                <div class="overview">
+                    <div class="overview-label">Daily Overview</div>
+                    <div class="overview-content">### 健康领域每日综述
+
+今日全球健康领域聚焦于传染病防控与全球卫生治理，呈现三大核心动态：WHO成员国持续推进《大流行病协议》关键附件谈判，以强化病原体获取与惠益共享机制；同时发布新报告强调整合创新与社区领导力对终结HIV、肝炎及性传播感染的重要性；此外，萨尔瓦多成功消除沙眼这一致盲性传染病，成为公共卫生领域的里程碑事件。
+
+**最重要事件：**
+1. **WHO《大流行病协议》谈判取得进展**：成员国就病原体获取与惠益共享（PABS）附件达成继续磋商共识，该附件是协议核心，旨在平衡病原体样本共享与疫苗、药物公平分配，为应对未来大流行奠定制度基础。
+2. **WHO发布终结HIV/肝炎/性传播感染新报告**：报告指出，需通过整合服务、创新技术和社区主导模式加速行动，当前全球在实现2030年消除目标上仍存显著差距，尤其受新冠疫情影响。
+3. **萨尔瓦多消除沙眼获WHO认证**：该国成为全球少数成功消除沙眼的国家之一，证明通过持续的眼科筛查、抗生素治疗和卫生改善，可彻底根除这一可预防性致盲疾病。
+
+**对行业或市场的影响判断：**
+- 全球卫生治理领域：PABS附件谈判的推进将重塑病原体样本共享规则，可能影响生物医药研发企业的数据获取与知识产权安排，需关注后续条款对疫苗和诊断试剂商业化的潜在约束。
+- 传染病防控市场：WHO强调整合创新与社区参与，将推动HIV、肝炎等领域的诊断、治疗和预防产品向基层下沉，利好快速检测、长效药物及数字健康解决方案的研发与推广。
+- 公共卫生投资方向：萨尔瓦多消除沙眼的成功案例，可能激励更多国家加大针对被忽视热带病的投入，带动相关诊断工具、抗生素及卫生基础设施的市场需求。</div>
+                </div>
+                
+
+                <div class="news-grid" id="grid-健康">
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Sat, 18 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/20-07-2026-who-member-states-continue-negotiations-on-the-pathogen-access-and-benefit-sharing-annex" target="_blank">WHO Member States continue negotiations on the Pathogen Access and Benefit Sharing Annex</a>
+                        </div>
+                        
+                        <div class="news-summary">WHO Member States have advanced negotiations on the Pathogen Access and Benefit Sharing (PABS) annex, a central componen…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Mon, 27 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/27-07-2026-who--integration--innovation-and-community-leadership-key-to-ending-hiv--hepatitis-and-stis" target="_blank">WHO: Integration, innovation and community leadership key to ending HIV, hepatitis and STIs</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO) today launched a new report assessing progress in implementing the Global Health Sec…</div>
+                        
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-source">
+                            WHONews
+                            
+                            <span class="news-published">Mon, 13 Ju</span>
+                            
+                        </div>
+                        <div class="news-title">
+                            <a href="https://www.who.int/news/item/13-07-2026-el-salvador-validated-by-who-as-having-eliminated-trachoma-as-a-public-health-problem" target="_blank">El Salvador validated by WHO as having eliminated trachoma as a public health problem</a>
+                        </div>
+                        
+                        <div class="news-summary">The World Health Organization (WHO) has validated El Salvador as having eliminated trachoma as a public health problem. …</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- FOOTER -->
+        <div class="page-footer">
+            Generated by Daily News AI Aggregator &middot; 2026-07-28
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" title="回到顶部">↑</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ===== Markdown 渲染 =====
+            const overviewContents = document.querySelectorAll('.overview-content');
+            overviewContents.forEach(function(element) {
+                const markdown = element.innerHTML;
+                const html = marked.parse(markdown);
+                element.innerHTML = html;
+            });
+
+            // ===== 暗色模式 =====
+            const themeToggle = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.dataset.theme = 'dark';
+                themeToggle.textContent = '🌙';
+            }
+            themeToggle.addEventListener('click', function() {
+                const isDark = document.documentElement.dataset.theme === 'dark';
+                document.documentElement.dataset.theme = isDark ? '' : 'dark';
+                localStorage.setItem('theme', isDark ? '' : 'dark');
+                themeToggle.textContent = isDark ? '☀️' : '🌙';
+            });
+
+            // ===== 分类折叠 =====
+            const headers = document.querySelectorAll('.cat-header');
+            headers.forEach(function(header) {
+                const gridId = header.dataset.target;
+                const grid = document.getElementById(gridId);
+                if (!grid) return;
+                const chevron = header.querySelector('.cat-chevron');
+                // 恢复折叠状态
+                const collapsed = localStorage.getItem('collapse-' + gridId);
+                if (collapsed === 'true') {
+                    grid.classList.add('collapsed');
+                    chevron.classList.add('collapsed');
+                }
+                // 计算并设置 max-height
+                function updateMaxHeight() {
+                    if (!grid.classList.contains('collapsed')) {
+                        grid.style.maxHeight = grid.scrollHeight + 80 + 'px';
+                    }
+                }
+                updateMaxHeight();
+                header.addEventListener('click', function() {
+                    const isCollapsed = grid.classList.toggle('collapsed');
+                    chevron.classList.toggle('collapsed');
+                    localStorage.setItem('collapse-' + gridId, isCollapsed);
+                    if (!isCollapsed) {
+                        grid.style.maxHeight = grid.scrollHeight + 80 + 'px';
+                    }
+                });
+            });
+
+            // ===== 分类导航高亮 =====
+            const navLinks = document.querySelectorAll('.cat-nav-link');
+            const sections = document.querySelectorAll('.category-section');
+            if (navLinks.length && sections.length) {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id;
+                            navLinks.forEach(function(link) {
+                                link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                            });
+                        }
+                    });
+                }, { rootMargin: '-100px 0px -60% 0px' });
+                sections.forEach(function(section) { observer.observe(section); });
+            }
+
+            // ===== 回到顶部 =====
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                backToTop.classList.toggle('visible', window.scrollY > 200);
+            });
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ===== 导航栏平滑滚动 =====
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
